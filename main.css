@@ -42,3 +42,11 @@ th, td {
   font-size: 5px;
 }
 
+.form_style{
+    padding: 8px;
+    background-color: #363535;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+}
