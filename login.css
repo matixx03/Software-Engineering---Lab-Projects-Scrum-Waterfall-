@@ -1,11 +1,8 @@
-.form_style{
-    label, input {
-      display: block;
-      margin-bottom: 10px;
-  }
-  
-      text-decoration: none;
-      display: flex;
-      justify-content: center;
-  }
-  
+
+  .form_style {
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+   
+}
