@@ -27,7 +27,7 @@ th, td {
 
 .navlist {
   list-style-type: none;
-  padding: 10px
+  padding: 10px;
 }
 
 .navelement { 
@@ -49,6 +49,11 @@ th, td {
 
 .navelement:hover{
   background-color: #757171;
+}
+
+.CalBox {
+  padding: 10px;
+  font-size: 20px;
 }
 
 .form_style{
