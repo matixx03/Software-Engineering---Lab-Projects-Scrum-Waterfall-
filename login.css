@@ -1,15 +1,25 @@
-
-  .form_style {
-    text-align: center;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-   
+.form_style {
+  text-align: center;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  display: flex;               /* Flexbox aktivieren */
+  flex-direction: column;      /* Elemente untereinander anordnen */
+  align-items: center;         /* Elemente horizontal zentrieren */
 }
+
 .bodyloginclass {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+input[type="text"],
+input[type="password"] {
+  margin: 10px 0;             /* Abstand zwischen den Feldern */
+  padding: 10px;              /* Innenabstand für die Eingabefelder */
+  width: 100%;                /* Eingabefelder auf volle Breite */
+  max-width: 300px;           /* Maximalbreite für die Eingabefelder */
 }
