@@ -1,17 +1,24 @@
 html, body {
-  height: 100%; /* Stellt sicher, dass der Körper die volle Höhe des Bildschirms einnimmt */
-  margin: 0; /* Entfernt Standard-Margin */
+  height: 100%; 
+  margin: 0; 
 }
 
 .bodyloginclass {
-  display: flex; /* Aktiviert das Flexbox-Layout */
-  justify-content: center; /* Zentriert den Inhalt horizontal */
-  align-items: center; /* Zentriert den Inhalt vertikal */
-  height: 100%; /* Stellt sicher, dass der Container die volle Höhe einnimmt */
+ margin-top: 200px;
+  justify-content: center;
+  align-items: center; 
+  height: 100%; 
+  text-align: center; 
+ 
 }
 
-.form_style {
-  text-align: center; /* Text innerhalb des Elements wird zentriert */
-  border: 100px solid #ddd; /* Rahmen um das Element */
-  padding: 20px; /* Innenabstand hinzufügen (optional) */
+.form_style{
+
+margin-top: 100px;
+
+
+}
+.headerclass{
+
+margin-top: 100px;
 }
