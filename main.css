@@ -24,7 +24,7 @@ th, td {
 
 .navlist {
   list-style-type: none;
-  
+  padding: 10px
 }
 
 .navelement { 
@@ -39,5 +39,6 @@ th, td {
 .navlink {
   color: white;
   text-decoration: none;
+  font-size: 5px;
 }
 
