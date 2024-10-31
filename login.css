@@ -1,0 +1,11 @@
+.form_style{
+    label, input {
+      display: block;
+      margin-bottom: 10px;
+  }
+  
+      text-decoration: none;
+      display: flex;
+      justify-content: center;
+  }
+  
