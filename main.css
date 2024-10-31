@@ -41,9 +41,10 @@ th, td {
 }
 
 .navlink {
-  color: white;
+
   text-decoration: none;
   font-size: 20px;
+
 }
 
 .navelement:hover{
