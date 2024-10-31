@@ -3,12 +3,12 @@
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 8px;
-  display: flex;               /* Flexbox aktivieren */
-  flex-direction: column;      /* Elemente untereinander anordnen */
-  align-items: center;         /* Elemente horizontal zentrieren */
-}
+  display: flex;              
+  flex-direction: column;      
+  align-items: center;         
 
 .bodyloginclass {
+  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,8 +18,8 @@
 
 input[type="text"],
 input[type="password"] {
-  margin: 10px 0;             /* Abstand zwischen den Feldern */
-  padding: 10px;              /* Innenabstand für die Eingabefelder */
-  width: 100%;                /* Eingabefelder auf volle Breite */
-  max-width: 300px;           /* Maximalbreite für die Eingabefelder */
+  margin: 10px 0;             
+  padding: 10px;              
+  width: 100%;                
+  max-width: 300px;           
 }
