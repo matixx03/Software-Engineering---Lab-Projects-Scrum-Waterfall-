@@ -2,7 +2,7 @@
   text-align: center;
   padding: 200px;
   border: 100px solid #ddd;
-
+max-width: 1009px;
   display: flex;              
   flex-direction: column;      
   align-items: center;         
@@ -12,7 +12,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
   margin: 0;
 }
 
