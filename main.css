@@ -58,6 +58,8 @@ th, td {
   font-size: 20px;
   box-shadow: inset 0 0 0 3px #363535;
   width: 130px;
+  height: 30px;
+  text-align: center;
 }
 
 .form_style{
