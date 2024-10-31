@@ -1,10 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scrollbar-Tabelle</title>
+  <style>
+    /* Fester Container für die Tabelle */
+    .table-container {
+      height: 300px; /* Höhe des Containers festlegen */
+      overflow-y: scroll; /* Vertikales Scrollen erlauben */
+      border: 1px solid #ddd; /* Rahmen für bessere Sichtbarkeit */
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+  </style>
 </head>
 <body>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Header 1</th>
+          <th>Header 2</th>
+          <th>Header 3</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Beispielhafte Tabellenzeilen -->
+        <tr>
+          <td>Eintrag 1</td>
+          <td>Eintrag 2</td>
+          <td>Eintrag 3</td>
+        </tr>
+        <!-- Weitere Zeilen hinzufügen -->
+      </tbody>
+    </table>
+  </div>
+
 </body>
 </html>
