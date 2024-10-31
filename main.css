@@ -5,10 +5,11 @@ body{
 }
 a {
   text-decoration: none;
-  color: #dddddd;
+  color: #ffffff;
 }
 
 .table-container {
+  margin: 40px;
   height: 300px; 
   overflow-y: scroll; 
   border: 1px solid #ddd; 
@@ -73,6 +74,8 @@ th, td {
   background-color: #757171;
   padding: 14px 16px;
   font-size: 20px;
+  width: 150px;
+  color: #ffffff;
 
 }
 
