@@ -19,26 +19,25 @@ th, td {
 .navigation {
   
   background-color: #363535;
+  display : flex;
 }
 
-ul {
+.navlist {
   list-style-type: none;
-  margin: 0;
-
-  padding: 0;
   
 }
 
-li { 
-  float: left
-}
-
-li a{
-  display: block;
-  color: white;
+.navelement { 
+  display: flex;
   background-color: #363535;
   text-align: center;
   padding: 14px 16px;
+  display: inline;
+  
+}
+
+.navlink {
+  color: white;
   text-decoration: none;
 }
 
