@@ -1,4 +1,7 @@
 
+body{
+  margin: 0;
+}
 
 .table-container {
   height: 300px; 
@@ -39,7 +42,7 @@ th, td {
 .navlink {
   color: white;
   text-decoration: none;
-  font-size: 5px;
+  font-size: 20px;
 }
 
 .form_style{
