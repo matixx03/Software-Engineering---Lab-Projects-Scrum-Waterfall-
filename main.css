@@ -18,16 +18,21 @@ th, td {
 ul {
   list-style-type: none;
   margin: 0;
+
   padding: 0;
-  background-color: #dddddd;
+  background-color: #363535;
 }
 
-li {
-  float: left;
+li { 
+  float: left
 }
 
-a {
+li a{
   display: block;
-  padding: 8px;
-  background-color: #dddddd;
+  color: white;
+  background-color: #363535;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
 }
+
