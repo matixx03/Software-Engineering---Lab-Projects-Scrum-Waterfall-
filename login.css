@@ -6,3 +6,10 @@
     border-radius: 8px;
    
 }
+.bodyloginclass {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
