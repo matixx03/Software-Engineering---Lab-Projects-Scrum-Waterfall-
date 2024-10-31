@@ -1,8 +1,8 @@
 .form_style {
   text-align: center;
   padding: 200px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  border: 100px solid #ddd;
+
   display: flex;              
   flex-direction: column;      
   align-items: center;         
@@ -16,10 +16,3 @@
   margin: 0;
 }
 
-input[type="text"],
-input[type="password"] {
-  margin: 10px 0;             
-  padding: 100px;              
-  width: 100%;                
-  max-width: 300px;           
-}
