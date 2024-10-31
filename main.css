@@ -52,9 +52,7 @@ th, td {
 }
 
 .form_style{
-    padding: 8px;
-
-    color: white;
+ 
     text-decoration: none;
     display: flex;
     justify-content: center;
