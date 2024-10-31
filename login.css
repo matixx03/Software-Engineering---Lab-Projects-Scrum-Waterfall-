@@ -1,13 +1,17 @@
-.form_style {
- 
-  text-align: center;
-  border: 100px solid #ddd;     
-  align-items: center;         
+html, body {
+  height: 100%; /* Stellt sicher, dass der Körper die volle Höhe des Bildschirms einnimmt */
+  margin: 0; /* Entfernt Standard-Margin */
 }
+
 .bodyloginclass {
-
-  justify-content: center;
- 
- 
+  display: flex; /* Aktiviert das Flexbox-Layout */
+  justify-content: center; /* Zentriert den Inhalt horizontal */
+  align-items: center; /* Zentriert den Inhalt vertikal */
+  height: 100%; /* Stellt sicher, dass der Container die volle Höhe einnimmt */
 }
 
+.form_style {
+  text-align: center; /* Text innerhalb des Elements wird zentriert */
+  border: 100px solid #ddd; /* Rahmen um das Element */
+  padding: 20px; /* Innenabstand hinzufügen (optional) */
+}
