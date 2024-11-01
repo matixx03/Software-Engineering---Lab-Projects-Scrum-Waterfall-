@@ -123,6 +123,16 @@ td {
   margin-right: 10px;
 }
 
+.vacrequestbox {
+  margin: 50px
+}
+.vacrequesttable td {
+  padding: 8px;
+  text-align: center;
+  border: 1px solid #ddd;
+  
+}
+
 
 .form_style{
  
