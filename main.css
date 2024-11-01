@@ -8,10 +8,7 @@ a {
   color: #ffffff;
 }
 
-p {
-  margin: auto;
-  text-align: center;
-}
+
 
 
 .table-container {
@@ -24,12 +21,17 @@ table {
   width: 100%;
   border-collapse: collapse;
 }
-th, td {
+th  {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  background-color: #b6b4b4;
+}
+td {
   padding: 8px;
   text-align: left;
   border-bottom: 1px solid #ddd;
 }
-
 
 .navigation {
   
@@ -77,6 +79,12 @@ th, td {
   align-items: center;
   
 }
+
+.calp {
+  margin: auto;
+  text-align: center;
+}
+
 .statsbutton {
   
   margin-left: 50px;
