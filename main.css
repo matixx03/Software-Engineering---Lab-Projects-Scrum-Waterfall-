@@ -86,6 +86,19 @@ th, td {
 }
 
 
+.vacationform {
+  padding: 14px 16px;
+  margin: 20px;
+  font-size: 20px;
+  text-decoration: solid;
+
+}
+
+.vacainput {
+  height: 20px;
+}
+
+
 .form_style{
  
     text-decoration: none;

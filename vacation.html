@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="main.css">
+    <meta charset="UTF-8">
+    <title>STC Time Management System</title>
+</head>
+
+<body>
+    <nav class="navigation">
+      <div class="navlist">
+      <ul>
+        <li class="navelement"><a href="index.html" class="navlink">Home</a></li>
+        <li class="navelement"><a href="vacation.html" class="navlink">Vacation Planner</a> </li>
+        <li class="navelement"><a href="sickdays.html" class="navlink">Sickday Planner</a> </li>
+
+
+      </ul>
+    </div>
+    </nav>
+    <main>
+
+        <div class="vacationbox">
+            <form action="postvacation.php" method="POST" class="vacationform">
+                vacation inquiry from <input type="date" name="vacationstart" class="vacainput">
+                to <input type="date" name="vacationend" class="vacainput">
+                <input type="submit" value="click to send" class="vacainput">
+            </form>
+
+
+        </div>
+        <div class="table-container">
+            <table>
+              <thead>
+                <tr>         
+                  <th>Date</th>
+                  <th>Weekday</th>
+                  <th>Begin</th>          
+                  <th>Break</th>
+                  <th>End</th>
+                  <th>Comments</th>
+        
+                </tr>
+              </thead>
+              <tbody>
+               
+                <tr><td>Eintrag 1</td><td>Eintrag 2</td><td>Eintrag 3</td></tr>
+                <tr><td>Eintrag 4</td><td>Eintrag 5</td><td>Eintrag 6</td></tr>
+                <tr><td>Eintrag 7</td><td>Eintrag 8</td><td>Eintrag 9</td></tr>
+                <tr><td>Eintrag 10</td><td>Eintrag 11</td><td>Eintrag 12</td></tr>
+                <tr><td>Eintrag 13</td><td>Eintrag 14</td><td>Eintrag 15</td></tr>
+                <tr><td>Eintrag 16</td><td>Eintrag 17</td><td>Eintrag 18</td></tr>
+                <tr><td>Eintrag 19</td><td>Eintrag 20</td><td>Eintrag 21</td></tr>
+                <tr><td>Eintrag 22</td><td>Eintrag 23</td><td>Eintrag 24</td></tr>
+                <tr><td>Eintrag 25</td><td>Eintrag 26</td><td>Eintrag 27</td></tr>
+                <tr><td>Eintrag 28</td><td>Eintrag 29</td><td>Eintrag 30</td></tr>
+                
+              </tbody>
+            </table>
+          </div>
+
+
+
+    </main>
+
+
+
+</body>
