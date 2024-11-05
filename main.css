@@ -83,7 +83,7 @@ td {
 .calp {
   margin: auto;
   text-align: center;
-  text-decoration: solid;
+  text-decoration: dashed;
 }
 
 .statsbutton {
