@@ -10,8 +10,8 @@
     <nav class="navigation">
         <div class="navlist">
             <ul>
-                <li class="navelement"><a href="index.html" class="navlink">Home</a></li>
-                <li class="navelement"><a href="vacation.html" class="navlink">Vacation Planner</a></li>
+                <li class="navelement"><a href="home.php" class="navlink">Home</a></li>
+                <li class="navelement"><a href="vacation.php" class="navlink">Vacation Planner</a> </li>
                 <li class="navelement"><a href="sickdays.html" class="navlink">Sickday Planner</a></li>
             </ul>
         </div>
