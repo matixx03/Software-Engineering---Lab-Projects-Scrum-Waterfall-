@@ -33,47 +33,84 @@
     
 
 
-    <div class="table-container">
-        <table>
-          <thead>
-            <tr>         
-              <th>Date</th>
-              <th>Weekday</th>
-              <th>Begin</th>          
-              <th>Break</th>
-              <th>End</th>
-              <th>Comments</th>
-    
-            </tr>
-          </thead>
-          <tbody>
-           
-            <tr><td>Eintrag 1</td><td>Eintrag 2</td><td>Eintrag 3</td></tr>
-            <tr><td>Eintrag 4</td><td>Eintrag 5</td><td>Eintrag 6</td></tr>
-            <tr><td>Eintrag 7</td><td>Eintrag 8</td><td>Eintrag 9</td></tr>
-            <tr><td>Eintrag 10</td><td>Eintrag 11</td><td>Eintrag 12</td></tr>
-            <tr><td>Eintrag 13</td><td>Eintrag 14</td><td>Eintrag 15</td></tr>
-            <tr><td>Eintrag 16</td><td>Eintrag 17</td><td>Eintrag 18</td></tr>
-            <tr><td>Eintrag 19</td><td>Eintrag 20</td><td>Eintrag 21</td></tr>
-            <tr><td>Eintrag 22</td><td>Eintrag 23</td><td>Eintrag 24</td></tr>
-            <tr><td>Eintrag 25</td><td>Eintrag 26</td><td>Eintrag 27</td></tr>
-            <tr><td>Eintrag 28</td><td>Eintrag 29</td><td>Eintrag 30</td></tr>
-            
-          </tbody>
-        </table>
-      </div>
+    <div class="vacationbox">
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" class="vacationform">
+                Date: <input type="date" name="date" class="vacainput" required>
+                Begin: <input type="time" name="time_started" class="vacainput" required> 
+                End: <input type="time" name="time_ended" class="vacainput" required>
+                <br><br>
+                Break <input type="time" name="time_break" class="vacainput" required> 
+                Comment: <input type="text" name="comment" class="vacainput">
+                <input type="submit" value="Save" class="vacainput">
+            </form>
+        </div>
 
-      <div class ="calbox">
-        <p class="calp">break today:</p>
-      </div>
-  
-      <div class = buttonbox>
-        <button type="button" class ="statsbutton">30min</button>
-      </div>
-  
-      <div class = buttonbox>
-        <button type="button" class ="statsbutton">45min</button>
-      </div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Weekday</th>
+                        <th>Begin</th>
+                        <th>Break</th>
+                        <th>End</th>
+                        <th>Comments</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $servername = "localhost";
+                    $username = "root";
+                    $password = "";
+                    $dbname = "time_management";
 
+                    $conn = new mysqli($servername, $username, $password, $dbname);
+
+                    if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                    }
+
+                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                        $date = $_POST['date'];
+                        $time_started = $_POST['time_started'];
+                        $time_break = $_POST['time_break'];
+                        $time_ended = $_POST['time_ended'];
+                        $comment = $_POST['comment'];
+                        $dayofweek = date('l', strtotime($date));
+
+                        $sql = "INSERT INTO day (date, weekday, time_started, time_break, time_ended, comment)
+                                VALUES ('$date', '$dayofweek', '$time_started', '$time_break', '$time_ended', '$comment')";
+
+                        if ($conn->query($sql) === TRUE) {
+                            echo "New record created successfully";
+                        } else {
+                            echo "Error: " . $sql . "<br>" . $conn->error;
+                        }
+                    }
+
+                    $sql = "SELECT * FROM day ORDER BY date";
+                    $result = $conn->query($sql);
+
+                    if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                            echo "<tr>";
+                            echo "<td>" . $row["date"] . "</td>";
+                            echo "<td>" . $row["weekday"] . "</td>";
+                            echo "<td>" . $row["time_started"] . "</td>";
+                            echo "<td>" . $row["time_break"] . "</td>";
+                            echo "<td>" . $row["time_ended"] . "</td>";
+                            echo "<td>" . $row["comment"] . "</td>";
+                            echo "</tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='6'>No data available</td></tr>";
+                    }
+
+                    $conn->close();
+                    ?>
+                </tbody>
+            </table>
+        </div>
     </main>
 </body>
+</html>
