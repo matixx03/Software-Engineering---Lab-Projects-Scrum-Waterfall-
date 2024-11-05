@@ -33,10 +33,10 @@
     
    
 
-    <div class="vacationform">
+    <div class="vacationbox">
     <p class="calp">book day</p>
     <br>
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" class="vacationbox">
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" class="vacationform">
                 Date: <input type="date" name="date" class="vacainput" required>
                 Begin: <input type="time" name="time_started" class="vacainput" required> 
                 End: <input type="time" name="time_ended" class="vacainput" required>
