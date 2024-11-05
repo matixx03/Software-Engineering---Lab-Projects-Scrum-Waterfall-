@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="main.css">
+    <meta charset="UTF-8">
+    <title>STC Time Management System</title>
+</head>
+
+<body>
+    <nav class="navigation">
+        <div class="navlist">
+            <ul>
+                <li class="navelement"><a href="index.html" class="navlink">Home</a></li>
+                <li class="navelement"><a href="vacation.html" class="navlink">Vacation Planner</a></li>
+                <li class="navelement"><a href="sickdays.html" class="navlink">Sickday Planner</a></li>
+            </ul>
+        </div>
+    </nav>
+    <main>
+        <div class="notifbuttonbox">
+            <button type="button" class="statsbutton"><a href="vacationstatus.html">status</a></button>
+        </div>
+
+        <div class="vacationbox">
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" class="vacationform">
+                Date: <input type="date" name="date" class="vacainput" required>
+                Begin: <input type="time" name="time_started" class="vacainput" required>
+                End: <input type="time" name="time_ended" class="vacainput" required>
+                Comment: <input type="text" name="comment" class="vacainput">
+                <input type="submit" value="Save" class="vacainput">
+            </form>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Weekday</th>
+                        <th>Begin</th>
+                        <th>Break</th>
+                        <th>End</th>
+                        <th>Comments</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $servername = "localhost";
+                    $username = "root";
+                    $password = "";
+                    $dbname = "time_management";
+
+                    $conn = new mysqli($servername, $username, $password, $dbname);
+
+                    if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                    }
+
+                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                        $date = $_POST['date'];
+                        $time_started = $_POST['time_started'];
+                        $time_ended = $_POST['time_ended'];
+                        $comment = $_POST['comment'];
+
+                        $sql = "INSERT INTO day (date, time_started, time_ended, comment)
+                                VALUES ('$date', '$time_started', '$time_ended', '$comment')";
+
+                        if ($conn->query($sql) === TRUE) {
+                            echo "New record created successfully";
+                        } else {
+                            echo "Error: " . $sql . "<br>" . $conn->error;
+                        }
+                    }
+
+                    $sql = "SELECT * FROM day ORDER BY date";
+                    $result = $conn->query($sql);
+
+                    if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                            echo "<tr>";
+                            echo "<td>" . $row["date"] . "</td>";
+                            echo "<td>" . $row["weekday"] . "</td>";
+                            echo "<td>" . $row["time_started"] . "</td>";
+                            echo "<td>" . $row["time_break"] . "</td>";
+                            echo "<td>" . $row["time_ended"] . "</td>";
+                            echo "<td>" . $row["comment"] . "</td>";
+                            echo "</tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='6'>No data available</td></tr>";
+                    }
+
+                    $conn->close();
+                    ?>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+</html>
