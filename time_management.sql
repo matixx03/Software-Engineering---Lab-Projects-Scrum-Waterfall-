@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 03, 2024 at 08:21 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Erstellungszeit: 05. Nov 2024 um 22:38
+-- Server-Version: 10.4.32-MariaDB
+-- PHP-Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `time_management`
+-- Datenbank: `time_management`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `day`
+-- Tabellenstruktur für Tabelle `day`
 --
 
 CREATE TABLE `day` (
@@ -39,13 +39,12 @@ CREATE TABLE `day` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `day`
+-- Daten für Tabelle `day`
 --
 
 INSERT INTO `day` (`id`, `date`, `weekday`, `time_started`, `time_ended`, `time_worked`, `time_break`, `comment`) VALUES
-(1, '2024-11-03', 'monday', '08:00:00', '16:00:00', '07:30:00', '00:30:00', ''),
+(1, '2024-11-03', 'monday', '08:00:00', '16:00:00', '07:30:00', '00:30:00', 'test'),
 (2, '2024-11-04', 'wednesday', '08:00:00', '16:00:00', '07:30:00', '00:30:00', ''),
-(3, '2024-11-03', 'saturday', '08:00:00', '16:00:00', '07:30:00', '00:30:00', ''),
 (4, '2024-11-05', 'Monday', '08:30:00', '17:00:00', '08:00:00', '00:30:00', 'Team meeting in the morning'),
 (5, '2024-11-06', 'Tuesday', '09:00:00', '18:00:00', '08:30:00', '00:30:00', 'Worked on project deliverables'),
 (6, '2024-11-07', 'Wednesday', '08:00:00', '16:30:00', '07:30:00', '01:00:00', 'Client call in the afternoon'),
@@ -60,7 +59,7 @@ INSERT INTO `day` (`id`, `date`, `weekday`, `time_started`, `time_ended`, `time_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `employee`
+-- Tabellenstruktur für Tabelle `employee`
 --
 
 CREATE TABLE `employee` (
@@ -73,7 +72,7 @@ CREATE TABLE `employee` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `employee`
+-- Daten für Tabelle `employee`
 --
 
 INSERT INTO `employee` (`id`, `name`, `teamID`, `department`, `working_hours`, `employee_type`) VALUES
@@ -83,7 +82,7 @@ INSERT INTO `employee` (`id`, `name`, `teamID`, `department`, `working_hours`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `month`
+-- Tabellenstruktur für Tabelle `month`
 --
 
 CREATE TABLE `month` (
@@ -95,7 +94,7 @@ CREATE TABLE `month` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `month`
+-- Daten für Tabelle `month`
 --
 
 INSERT INTO `month` (`id`, `timesheet_id`, `is_approved`, `sickdays`, `vacation_days`) VALUES
@@ -105,7 +104,7 @@ INSERT INTO `month` (`id`, `timesheet_id`, `is_approved`, `sickdays`, `vacation_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `timesheet`
+-- Tabellenstruktur für Tabelle `timesheet`
 --
 
 CREATE TABLE `timesheet` (
@@ -115,38 +114,73 @@ CREATE TABLE `timesheet` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `timesheet`
+-- Daten für Tabelle `timesheet`
 --
 
 INSERT INTO `timesheet` (`id`, `employee_id`, `flex_time_account`) VALUES
 (1, 1, '00:00:00'),
 (2, 2, '00:00:00');
 
+-- --------------------------------------------------------
+
 --
--- Indexes for dumped tables
+-- Tabellenstruktur für Tabelle `vacation`
+--
+
+CREATE TABLE `vacation` (
+  `index` int(11) NOT NULL,
+  `begin` date NOT NULL,
+  `end` date NOT NULL,
+  `status` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Daten für Tabelle `vacation`
+--
+
+INSERT INTO `vacation` (`index`, `begin`, `end`, `status`) VALUES
+(1, '0000-00-00', '0000-00-00', 'test'),
+(2, '2024-11-05', '2024-11-07', 'genehmigt'),
+(3, '2024-11-05', '2024-11-07', 'abgelehnt');
+
+--
+-- Indizes der exportierten Tabellen
 --
 
 --
--- Indexes for table `day`
+-- Indizes für die Tabelle `day`
 --
 ALTER TABLE `day`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `date` (`date`);
 
 --
--- Indexes for table `employee`
+-- Indizes für die Tabelle `employee`
 --
 ALTER TABLE `employee`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- Indizes für die Tabelle `vacation`
+--
+ALTER TABLE `vacation`
+  ADD UNIQUE KEY `index` (`index`);
+
+--
+-- AUTO_INCREMENT für exportierte Tabellen
 --
 
 --
--- AUTO_INCREMENT for table `day`
+-- AUTO_INCREMENT für Tabelle `day`
 --
 ALTER TABLE `day`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT für Tabelle `vacation`
+--
+ALTER TABLE `vacation`
+  MODIFY `index` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
