@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="timetracking.css">
     <link rel="stylesheet" href="main.css">
     <meta charset="UTF-8">
     <title>STC Time Management System</title>
@@ -29,6 +31,57 @@
 
     <div class = buttonbox>
       <button type="button" class ="statsbutton"><a href="notifications.html">notifications</a></button>
+    </div>
+
+    <div class="status-box">
+      <div id="timeStatus" class="time-status">
+          Nicht eingestempelt
+      </div>
+
+      <div class="flex-time">
+          Überstundenkonto: 0:00
+      </div>
+    </div>
+
+    <div class="control-panel">
+      <div class="button-container"> 
+        <button class="time-button" id="startButton">Arbeitszeit beginnen</button>
+        <button class="time-button manual-entry-button" id="manualEntryButton">Zeit nachtragen</button>
+      </div>
+      
+      <div id="manualEntryForm" class="manual-entry-form hidden">
+          <div class="form-row">
+              <div class="form-group">
+                  <label for="entryDate">Datum:</label>
+                  <input type="date" id="entryDate" class="form-input">
+              </div>
+              <div class="form-group">
+                  <label for="startTime">Beginn:</label>
+                  <input type="time" id="startTime" class="form-input">
+              </div>
+              <div class="form-group">
+                  <label for="endTime">Ende:</label>
+                  <input type="time" id="endTime" class="form-input">
+              </div>
+              <div class="form-group">
+                  <label for="breakTime">Pause (Minuten):</label>
+                  <input type="number" id="breakTime" class="form-input" min="0" step="15" value="30">
+              </div>
+              <div class="form-group">
+                  <label for="comment">Kommentar:</label>
+                  <input type="text" id="comment" class="form-input">
+              </div>
+              <div class="form-group button-group">
+                  <button class="time-button" id="saveManualEntry">Speichern</button>
+                  <button class="time-button cancel-button" id="cancelManualEntry">Abbrechen</button>
+              </div>
+          </div>
+      </div>
+
+      <div id="breakButtons">
+          <button class="time-button break-button">30min Pause</button>
+          <button class="time-button break-button">45min Pause</button>
+      </div>
     </div>
     
    
@@ -114,5 +167,6 @@
             </table>
         </div>
     </main>
+    <script type="module" src="js/timeTracking.js"></script>
 </body>
 </html>
