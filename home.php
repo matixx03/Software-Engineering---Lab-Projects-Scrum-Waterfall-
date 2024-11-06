@@ -86,19 +86,7 @@
     
    
 
-    <div class="vacationbox">
-    <p class="calp">book day</p>
-    <br>
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" class="vacationform">
-                Date: <input type="date" name="date" class="vacainput" required>
-                Begin: <input type="time" name="time_started" class="vacainput" required> 
-                End: <input type="time" name="time_ended" class="vacainput" required>
-                <br><br>
-                Break <input type="time" name="time_break" class="vacainput" required> 
-                Comment: <input type="text" name="comment" class="vacainput">
-                <input type="submit" value="Save" class="vacainput">
-            </form>
-        </div>
+    
 
         <div class="table-container">
             <table>
@@ -109,6 +97,7 @@
                         <th>Begin</th>
                         <th>Break</th>
                         <th>End</th>
+                        <th>Time_worked</th>
                         <th>Comments</th>
                     </tr>
                 </thead>
@@ -118,6 +107,9 @@
                     $username = "root";
                     $password = "";
                     $dbname = "time_management";
+                    $month = date("F");
+                    $tableName = "table_" . $month;
+                    echo $month;
 
                     $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -132,8 +124,10 @@
                         $time_ended = $_POST['time_ended'];
                         $comment = $_POST['comment'];
                         $dayofweek = date('l', strtotime($date));
+                        echo $tableName;
+                        
 
-                        $sql = "INSERT INTO day (date, weekday, time_started, time_break, time_ended, comment)
+                        $sql = "INSERT INTO november (date, weekday, time_started, time_break, time_ended, comment)
                                 VALUES ('$date', '$dayofweek', '$time_started', '$time_break', '$time_ended', '$comment')";
 
                         if ($conn->query($sql) === TRUE) {
@@ -143,7 +137,7 @@
                         }
                     }
 
-                    $sql = "SELECT * FROM day ORDER BY date";
+                    $sql = "SELECT * FROM november ORDER BY date";
                     $result = $conn->query($sql);
 
                     if ($result->num_rows > 0) {
