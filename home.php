@@ -127,9 +127,9 @@
                         
                         
 
-                        $sql = "INSERT INTO november (date, weekday, time_started, time_break, time_ended, comment)
+                        $sql = "INSERT INTO $month (date, weekday, time_started, time_break, time_ended, comment)
                                 VALUES ('$date', '$dayofweek', '$time_started', '$time_break', '$time_ended', '$comment')";
-                        echo $sql;
+                        
                         if ($conn->query($sql) === TRUE) {
                             echo "New record created successfully";
                         } else {
@@ -137,7 +137,7 @@
                         }
                     }
 
-                    $sql = "SELECT * FROM november ORDER BY date";
+                    $sql = "SELECT * FROM $month ORDER BY date";
                     $result = $conn->query($sql);
 
                     if ($result->num_rows > 0) {
