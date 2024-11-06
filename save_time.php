@@ -11,8 +11,6 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 // Bei POST Anfrage
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // liest die gesendeten Daten und wandelt sie in ein PHP-Array um
-    $data = json_decode(file_get_contents('php://input'), true);
-    
     
     $stmt = $conn->prepare("INSERT INTO day (date, weekday, time_started, time_ended, time_break, time_worked, comment) VALUES (?, ?, ?, ?, ?, ?, ?)");
     

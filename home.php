@@ -84,9 +84,7 @@
       </div>
     </div>
     
-   
 
-    
 
         <div class="table-container">
             <table>
@@ -97,66 +95,12 @@
                         <th>Begin</th>
                         <th>Break</th>
                         <th>End</th>
-                        <th>Time_worked</th>
+                        <th>Worked:</th>
                         <th>Comments</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    $servername = "localhost";
-                    $username = "root";
-                    $password = "";
-                    $dbname = "time_management";
-                    $month = date("F");
-                    $tableName = "table_" . $month;
-                    echo $month;
-
-                    $conn = new mysqli($servername, $username, $password, $dbname);
-
-                    if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                    }
-
-                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                        $date = $_POST['date'];
-                        $time_started = $_POST['time_started'];
-                        $time_break = $_POST['time_break'];
-                        $time_ended = $_POST['time_ended'];
-                        $comment = $_POST['comment'];
-                        $dayofweek = date('l', strtotime($date));
-                        
-                        
-
-                        $sql = "INSERT INTO $month (date, weekday, time_started, time_break, time_ended, comment)
-                                VALUES ('$date', '$dayofweek', '$time_started', '$time_break', '$time_ended', '$comment')";
-                        
-                        if ($conn->query($sql) === TRUE) {
-                            echo "New record created successfully";
-                        } else {
-                            echo "Error: " . $sql . "<br>" . $conn->error;
-                        }
-                    }
-
-                    $sql = "SELECT * FROM $month ORDER BY date";
-                    $result = $conn->query($sql);
-
-                    if ($result->num_rows > 0) {
-                        while($row = $result->fetch_assoc()) {
-                            echo "<tr>";
-                            echo "<td>" . $row["date"] . "</td>";
-                            echo "<td>" . $row["weekday"] . "</td>";
-                            echo "<td>" . $row["time_started"] . "</td>";
-                            echo "<td>" . $row["time_break"] . "</td>";
-                            echo "<td>" . $row["time_ended"] . "</td>";
-                            echo "<td>" . $row["comment"] . "</td>";
-                            echo "</tr>";
-                        }
-                    } else {
-                        echo "<tr><td colspan='6'>No data available</td></tr>";
-                    }
-
-                    $conn->close();
-                    ?>
+                    
                 </tbody>
             </table>
         </div>
