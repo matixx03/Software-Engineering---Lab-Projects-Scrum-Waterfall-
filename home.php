@@ -124,12 +124,12 @@
                         $time_ended = $_POST['time_ended'];
                         $comment = $_POST['comment'];
                         $dayofweek = date('l', strtotime($date));
-                        echo $tableName;
+                        
                         
 
                         $sql = "INSERT INTO november (date, weekday, time_started, time_break, time_ended, comment)
                                 VALUES ('$date', '$dayofweek', '$time_started', '$time_break', '$time_ended', '$comment')";
-
+                        echo $sql;
                         if ($conn->query($sql) === TRUE) {
                             echo "New record created successfully";
                         } else {

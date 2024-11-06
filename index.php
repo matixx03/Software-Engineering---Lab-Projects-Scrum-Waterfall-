@@ -62,7 +62,7 @@
                         $time_ended = $_POST['time_ended'];
                         $comment = $_POST['comment'];
 
-                        $sql = "INSERT INTO day (date, time_started, time_ended, comment)
+                        $sql = "INSERT INTO november (date, time_started, time_ended, comment)
                                 VALUES ('$date', '$time_started', '$time_ended', '$comment')";
 
                         if ($conn->query($sql) === TRUE) {
@@ -72,7 +72,7 @@
                         }
                     }
 
-                    $sql = "SELECT * FROM day ORDER BY date";
+                    $sql = "SELECT * FROM november ORDER BY date";
                     $result = $conn->query($sql);
 
                     if ($result->num_rows > 0) {
