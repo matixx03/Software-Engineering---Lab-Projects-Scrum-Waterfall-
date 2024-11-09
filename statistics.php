@@ -8,48 +8,56 @@
 <body>
     <nav class="navigation">
       <div class="navlist">
-      <ul>
-        <li class="navelement"><a href="index.html" class="navlink">Home</a></li>
-        <li class="navelement"><a href="vacation.html" class="navlink">Vacation Planner</a> </li>
-        <li class="navelement"><a href="sickdays.html" class="navlink">Sickday Planner</a> </li>
-
-
-      </ul>
-    </div>
+        <ul>
+          <li class="navelement"><a href="index.html" class="navlink">Home</a></li>
+          <li class="navelement"><a href="vacation.html" class="navlink">Vacation Planner</a> </li>
+          <li class="navelement"><a href="sickdays.html" class="navlink">Sickday Planner</a> </li>
+        </ul>
+      </div>
     </nav>
     
     <main>
-    <div class ="calbox">
-      <p class="calp">your calendar</p>
+    <div class="calbox">
+      <p class="calp">Your Calendar</p>
     </div>
 
-<?php 
+    <?php 
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "time_management";
 
+    $conn = new mysqli($servername, $username, $password, $dbname);
 
-$sql = "SELECT time_started, 
-               CASE WHEN time_started > 8 THEN time_started - 8 ELSE 0 END AS overtime_hours 
-        FROM time_management";
-$result = $conn->query($sql);
-
-
-if ($result->num_rows > 0) {
-    echo "<table>";
-    echo "<tr><th>Stunden gearbeitet</th><th>Überstunden</th></tr>";
-    while ($row = $result->fetch_assoc()) {
-        if ($row["overtime_hours"] > 0) { 
-            echo "<tr><td>" . $row["time_started"]. "</td><td>" . $row["overtime_hours"] . "</td></tr>";
-        }
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
     }
-    echo "</table>";
-} else {
-    echo "Keine Daten gefunden.";
-}
 
-$conn->close();
-?>
+    $sql = "SELECT time_started, -
+                   CASE WHEN time_started > 8 THEN time_started - 8 ELSE 0 END AS overtime_hours,
+                   DATE_FORMAT(CURRENT_DATE, '%Y-%m-%d') AS current_date, 
+                   DAYNAME(CURRENT_DATE) AS weekday 
+            FROM time_management";
+    $result = $conn->query($sql);
 
+   
+    if ($result->num_rows > 0) {
+        echo "<table>";
+        echo "<tr><th>Datum</th><th>Wochentag</th><th>Stunden gearbeitet</th><th>Überstunden</th></tr>";
+        while ($row = $result->fetch_assoc()) {
+            if ($row["overtime_hours"] > 0) { 
+                echo "<tr><td>" . $row["current_date"]. "</td><td>" . $row["weekday"] . "</td><td>" . $row["time_started"] . "</td><td>" . $row["overtime_hours"] . "</td></tr>";
+            }
+        }
+        echo "</table>";
+    } else {
+        echo "Keine Daten gefunden.";
+    }
 
-<div class="table-container">
+    $conn->close();
+    ?>
+
+    <div class="table-container">
         <table>
           <thead>
             <tr>         
@@ -59,11 +67,9 @@ $conn->close();
               <th>Break</th>
               <th>End</th>
               <th>Comments</th>
-    
             </tr>
           </thead>
           <tbody>
-           
             <tr><td>Eintrag 1</td><td>Eintrag 2</td><td>Eintrag 3</td></tr>
             <tr><td>Eintrag 4</td><td>Eintrag 5</td><td>Eintrag 6</td></tr>
             <tr><td>Eintrag 7</td><td>Eintrag 8</td><td>Eintrag 9</td></tr>
@@ -74,7 +80,8 @@ $conn->close();
             <tr><td>Eintrag 22</td><td>Eintrag 23</td><td>Eintrag 24</td></tr>
             <tr><td>Eintrag 25</td><td>Eintrag 26</td><td>Eintrag 27</td></tr>
             <tr><td>Eintrag 28</td><td>Eintrag 29</td><td>Eintrag 30</td></tr>
-            
           </tbody>
         </table>
-      </div>
+    </div>
+</body>
+</html>
