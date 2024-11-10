@@ -77,9 +77,9 @@ CREATE TABLE `employee` (
 -- Daten für Tabelle `employee`
 --
 
-INSERT INTO `employee` (`id`, `name`, `teamID`, `department`, `working_hours`, `employee_type`) VALUES
-(1, 'John Doe', 101, 'Engineering', '08:00:00', 'employee'),
-(2, 'Jane Smith', 102, 'Marketing', '08:00:00', 'supervisor');
+INSERT INTO `employee` (`id`, `name`, `teamID`, `department`, `working_hours`, `username`, `password`, `employee_type`) VALUES
+(1, 'John Doe', 101, 'Engineering', '08:00:00', 'employee', 'employee', 'employee'),
+(2, 'Jane Smith', 102, 'Marketing', '08:00:00', 'supervisor', 'supervisor', 'supervisor');
 
 -- --------------------------------------------------------
 
