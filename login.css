@@ -1,4 +1,5 @@
 html, body {
+
   height: 100%; 
   margin: 0; 
 }
@@ -16,13 +17,28 @@ html, body {
   padding: 100px;
 }
 
-.form_style{
+.form_style {
 
 margin-top: 70px;
-
-
 }
-.headerclass{
+
+.form-group {
+
+  margin-right: 10px;
+  text-align: center;
+}
+
+.form-group1 {
+
+  margin-right: 6px;
+}
+
+.submit {
+
+  padding-top: 10px;
+}
+
+.headerclass {
 
 margin-top: 30px;
 }
