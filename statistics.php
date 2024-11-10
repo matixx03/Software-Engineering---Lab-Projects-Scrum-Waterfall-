@@ -33,11 +33,15 @@
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "SELECT time_started, 
-                   CASE WHEN time_started > 8 THEN time_started - 8 ELSE 0 END AS overtime_hours,
-                   DATE_FORMAT(CURRENT_DATE, '%Y-%m-%d') AS current_date, 
-                   DAYNAME(CURRENT_DATE) AS weekday 
-            FROM day";
+    $sql = "SELECT time_started,
+    CASE 
+        WHEN HOUR(time_started) > 8 
+        THEN HOUR(time_started) - 8 
+        ELSE 0 
+    END AS overtime_hours,
+    DATE_FORMAT(CURDATE(), '%Y-%m-%d') AS todays_date,  -- Changed alias name
+    DAYNAME(CURDATE()) AS weekday
+    FROM day";
     $result = $conn->query($sql);
 
    
@@ -46,7 +50,7 @@
         echo "<tr><th>Datum</th><th>Wochentag</th><th>Stunden gearbeitet</th><th>Überstunden</th></tr>";
         while ($row = $result->fetch_assoc()) {
             if ($row["overtime_hours"] > 0) { 
-                echo "<tr><td>" . $row["current_date"]. "</td><td>" . $row["weekday"] . "</td><td>" . $row["time_started"] . "</td><td>" . $row["overtime_hours"] . "</td></tr>";
+                echo "<tr><td>" . $row["todays_date"]. "</td><td>" . $row["weekday"] . "</td><td>" . $row["time_started"] . "</td><td>" . $row["overtime_hours"] . "</td></tr>";
             }
         }
         echo "</table>";
@@ -56,23 +60,5 @@
 
     $conn->close();
     ?>
-
-    <div class="table-container">
-        <table>
-          <thead>
-            <tr>         
-              <th>Date</th>
-              <th>Weekday</th>
-              <th>Begin</th>          
-              <th>Break</th>
-              <th>End</th>
-              <th>Comments</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-          </tbody>
-        </table>
-    </div>
 </body>
 </html>
