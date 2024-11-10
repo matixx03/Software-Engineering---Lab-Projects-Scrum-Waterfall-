@@ -86,19 +86,6 @@
     
    
 
-    <div class="vacationbox">
-    <p class="calp">book day</p>
-    <br>
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" class="vacationform">
-                Date: <input type="date" name="date" class="vacainput" required>
-                Begin: <input type="time" name="time_started" class="vacainput" required> 
-                End: <input type="time" name="time_ended" class="vacainput" required>
-                <br><br>
-                Break <input type="time" name="time_break" class="vacainput" required> 
-                Comment: <input type="text" name="comment" class="vacainput">
-                <input type="submit" value="Save" class="vacainput">
-            </form>
-        </div>
 
         <div class="table-container">
             <table>
@@ -108,6 +95,7 @@
                         <th>Weekday</th>
                         <th>Begin</th>
                         <th>Break</th>
+                        <th>Hours Wo
                         <th>End</th>
                         <th>Comments</th>
                     </tr>
