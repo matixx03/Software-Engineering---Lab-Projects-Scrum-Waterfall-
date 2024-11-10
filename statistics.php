@@ -39,7 +39,7 @@
         THEN HOUR(time_started) - 8 
         ELSE 0 
     END AS overtime_hours,
-    DATE_FORMAT(CURDATE(), '%Y-%m-%d') AS todays_date,  -- Changed alias name
+    DATE_FORMAT(CURDATE(), '%Y-%m-%d') AS todays_date,
     DAYNAME(CURDATE()) AS weekday
     FROM day";
     $result = $conn->query($sql);
