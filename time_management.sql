@@ -68,6 +68,8 @@ CREATE TABLE `employee` (
   `teamID` int(11) DEFAULT NULL,
   `department` varchar(255) DEFAULT NULL,
   `working_hours` time DEFAULT NULL,
+    `username` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
   `employee_type` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
