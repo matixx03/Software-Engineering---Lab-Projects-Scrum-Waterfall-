@@ -35,45 +35,45 @@
 
     <div class="status-box">
       <div id="timeStatus" class="time-status">
-          Nicht eingestempelt
+          not on the clock
       </div>
 
       <div class="flex-time">
-          Überstundenkonto: 0:00
+          Overtime: 0:00
       </div>
     </div>
 
     <div class="control-panel">
       <div class="button-container"> 
-        <button class="time-button" id="startButton">Arbeitszeit beginnen</button>
-        <button class="time-button manual-entry-button" id="manualEntryButton">Zeit nachtragen</button>
+        <button class="time-button" id="startButton">Start Working</button>
+        <button class="time-button manual-entry-button" id="manualEntryButton">Manual Time Entry</button>
       </div>
       
       <div id="manualEntryForm" class="manual-entry-form hidden">
           <div class="form-row">
               <div class="form-group">
-                  <label for="entryDate">Datum:</label>
+                  <label for="entryDate">Date:</label>
                   <input type="date" id="entryDate" class="form-input">
               </div>
               <div class="form-group">
-                  <label for="startTime">Beginn:</label>
+                  <label for="startTime">Begin:</label>
                   <input type="time" id="startTime" class="form-input">
               </div>
               <div class="form-group">
-                  <label for="endTime">Ende:</label>
+                  <label for="endTime">End:</label>
                   <input type="time" id="endTime" class="form-input">
               </div>
               <div class="form-group">
-                  <label for="breakTime">Pause (Minuten):</label>
+                  <label for="breakTime">Pause (Minutes):</label>
                   <input type="number" id="breakTime" class="form-input" min="0" step="15" value="30">
               </div>
               <div class="form-group">
-                  <label for="comment">Kommentar:</label>
+                  <label for="comment">Comment:</label>
                   <input type="text" id="comment" class="form-input">
               </div>
               <div class="form-group button-group">
-                  <button class="time-button" id="saveManualEntry">Speichern</button>
-                  <button class="time-button cancel-button" id="cancelManualEntry">Abbrechen</button>
+                  <button class="time-button" id="saveManualEntry">Save</button>
+                  <button class="time-button cancel-button" id="cancelManualEntry">Abort</button>
               </div>
           </div>
       </div>
@@ -84,21 +84,7 @@
       </div>
     </div>
     
-   
 
-    <div class="vacationbox">
-    <p class="calp">book day</p>
-    <br>
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" class="vacationform">
-                Date: <input type="date" name="date" class="vacainput" required>
-                Begin: <input type="time" name="time_started" class="vacainput" required> 
-                End: <input type="time" name="time_ended" class="vacainput" required>
-                <br><br>
-                Break <input type="time" name="time_break" class="vacainput" required> 
-                Comment: <input type="text" name="comment" class="vacainput">
-                <input type="submit" value="Save" class="vacainput">
-            </form>
-        </div>
 
         <div class="table-container">
             <table>
