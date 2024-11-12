@@ -22,7 +22,7 @@
     
     <main>
     <div class ="calbox">
-      <p class="calp">your calendar</p>
+      <p class="calp">Your Calendar</p>
     </div>
 
     <div class = buttonbox>

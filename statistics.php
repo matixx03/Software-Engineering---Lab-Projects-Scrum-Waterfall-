@@ -22,6 +22,8 @@
       <p class="calp">Your Calendar</p>
     </div>
 
+    <div> &nbsp; </div>
+
     <?php 
     $servername = "localhost";
     $username = "root";
