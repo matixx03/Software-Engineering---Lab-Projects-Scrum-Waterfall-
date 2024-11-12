@@ -54,7 +54,7 @@ class TimeTracker {
             this.currentEntry.isWorking = true;
             this.updateTimeStatus('Arbeitet seit: ' + this.formatTime(this.currentEntry.startTime));
             const startButton = document.getElementById('startButton');
-            startButton.textContent = 'Arbeitszeit beenden';
+            startButton.textContent = 'Stop Working';
             startButton.classList.add('active');
             document.getElementById('breakButtons').style.display = 'block';
 
