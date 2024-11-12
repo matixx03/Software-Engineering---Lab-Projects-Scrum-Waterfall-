@@ -26,7 +26,7 @@
     </div>
 
     <div class = buttonbox>
-      <button type="button" class ="statsbutton"><a href="statistics.php">statistics</a></button>
+      <button type="button" class ="statsbutton"><a href="statisticssuper.php">statistics</a></button>
     </div>
 
     <div class = buttonbox>
