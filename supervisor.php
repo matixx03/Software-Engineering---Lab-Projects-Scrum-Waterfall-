@@ -95,6 +95,7 @@
                         <th>Begin</th>
                         <th>Break</th>
                         <th>End</th>
+                        <th>time_worked</th>
                         <th>Comments</th>
                     </tr>
                 </thead>
