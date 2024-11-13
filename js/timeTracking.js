@@ -113,7 +113,7 @@ class TimeTracker {
             // erstellt neuen Zeiteintrag
             const timeEntry = {
                 date: this.currentEntry.startTime.toISOString().split('T')[0],      // Datum in YYYY-MM-DD Format
-                weekday: this.currentEntry.startTime.toLocaleDateString('de-DE', { weekday: 'long' }),
+                weekday: this.currentEntry.startTime.toLocaleDateString('en-US', { weekday: 'long' }),
                 timeStarted: this.formatTime(this.currentEntry.startTime),
                 timeEnded: this.formatTime(endTime),
                 timeBreak: `${Math.floor(this.currentEntry.breakDuration / 60)}:${(this.currentEntry.breakDuration % 60).toFixed(0).padStart(2, '0')}`,
@@ -208,7 +208,7 @@ async function saveManualEntry() {
     // erstellt neuen Zeiteintrag
     const entry = {
         date: date,
-        weekday: new Date(date).toLocaleDateString('de-DE', { weekday: 'long' }),
+        weekday: new Date(date).toLocaleDateString('en-US', { weekday: 'long' }),
         timeStarted: startTime,
         timeEnded: endTime,
         timeBreak: `${Math.floor(breakTime/60)}:${(breakTime%60).toString().padStart(2, '0')}`,
