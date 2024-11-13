@@ -52,7 +52,7 @@ class TimeTracker {
         if (!this.currentEntry.isWorking) {
             this.currentEntry.startTime = new Date();
             this.currentEntry.isWorking = true;
-            this.updateTimeStatus('Arbeitet seit: ' + this.formatTime(this.currentEntry.startTime));
+            this.updateTimeStatus('Working since: ' + this.formatTime(this.currentEntry.startTime));
             const startButton = document.getElementById('startButton');
             startButton.textContent = 'Stop Working';
             startButton.classList.add('active');
@@ -72,7 +72,7 @@ class TimeTracker {
         if (!this.currentEntry.isOnBreak && this.currentEntry.isWorking) {
             this.currentEntry.breakStart = new Date();
             this.currentEntry.isOnBreak = true;
-            this.updateTimeStatus('Pause seit: ' + this.formatTime(this.currentEntry.breakStart), true);
+            this.updateTimeStatus('Break since: ' + this.formatTime(this.currentEntry.breakStart), true);
             
             // setTimeout führt Funktion nach der übergebenen Verzögerung aus
             // bei 30 Minuten Pause z.B nach 30*60*1000 = 1.800.000 ms also 30 Minuten
@@ -90,7 +90,7 @@ class TimeTracker {
             const breakDuration = (breakEnd - this.currentEntry.breakStart) / (1000 * 60);
             this.currentEntry.breakDuration += breakDuration;   // addiert Pausendauer zu Gesamtpausendauer
             this.currentEntry.isOnBreak = false;
-            this.updateTimeStatus('Arbeitet seit: ' + this.formatTime(this.currentEntry.startTime));
+            this.updateTimeStatus('Working since: ' + this.formatTime(this.currentEntry.startTime));
         }
     }
 
@@ -135,9 +135,9 @@ class TimeTracker {
             };
 
             // aktualisiert UI
-            this.updateTimeStatus('Nicht eingestempelt');
+            this.updateTimeStatus('Not clocked in');
             const startButton = document.getElementById('startButton');
-            startButton.textContent = 'Arbeitszeit beginnen';
+            startButton.textContent = 'Start working';
             startButton.classList.remove('active');
             document.getElementById('breakButtons').style.display = 'none';
         }

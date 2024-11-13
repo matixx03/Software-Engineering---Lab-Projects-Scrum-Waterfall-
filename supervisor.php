@@ -35,7 +35,7 @@
 
     <div class="status-box">
       <div id="timeStatus" class="time-status">
-          not on the clock
+          Not clocked in
       </div>
 
       <div class="flex-time">
