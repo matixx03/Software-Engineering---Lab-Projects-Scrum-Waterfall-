@@ -1,0 +1,90 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    justify-content: center; 
+}
+a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.table-container {
+    margin: 40px;
+    height: 300px; 
+    overflow-y: scroll; 
+    border: 1px solid #ddd; 
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    background-color: #b6b4b4;
+}
+td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.navigation {
+    background-color: #363535;
+    display: flex;
+}
+.navlist {
+    list-style-type: none;
+    padding: 10px;
+}
+.header1 {
+   
+    text-align: center;
+    margin-left: auto;  
+    margin-right: auto; 
+    width: fit-content; 
+}
+
+.navelement { 
+    display: inline-block;
+    background-color: #363535;
+    text-align: center;
+    padding: 20px;
+}
+.navlink {
+    color: #f7efef;
+    text-decoration: none;
+    font-size: 20px;
+}
+.navelement:hover {
+    background-color: #757171;
+}
+
+.add_book {
+    padding: 14px 16px;
+    box-shadow: inset 0 0 0 3px #363535;
+    margin: auto;
+    margin-top: 30px;
+    width: 650px;
+    font-size: 20px;
+    text-align: center;
+}
+.addform {
+    margin: 5px 0;
+    padding: 8px;
+    width: 90%;
+    font-size: 16px;
+}
+
+
+.delete {
+    background-color: #d9534f;
+    color: #ffffff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+.delete:hover {
+    background-color: #c9302c;
+}
