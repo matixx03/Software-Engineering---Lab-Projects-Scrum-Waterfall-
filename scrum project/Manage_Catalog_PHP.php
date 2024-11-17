@@ -26,7 +26,7 @@
             Edition: <input type="text" name="edition" class="addform" required>
             Publisher: <input type="text" name="publisher" class="addform" required>
             Number of Pieces: <input type="number" name="number_of_pieces" class="addform"min="1" value="1"required>
-            <input type="submit" name="save" value="Save" class="vacainput">
+            <input type="submit" name=" add " value="add " class="vacainput">
         </form>
 </div>
 <div class="table-container">
