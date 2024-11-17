@@ -20,16 +20,14 @@
     <main> 
     <div class="add_book">
     <form action="Manage_Catalogp.php" method="POST" class="addform">
-        Title: <input type="text" name="title" class="addform" required>
-        Author: <input type="text" name="author" class="addform" required>
-        Year: <input type="number" name="year" class="addform" min="2000" required>
-        Edition: <input type="text" name="edition" class="addform" required>
-        Publisher: <input type="text" name="publisher" class="addform" required>
-        Number of Pieces: <input type="number" name="number_of_pieces" class="addform" min="1" step="1" required>
-
-
-        <input type="submit" name="save" value="Save" class="vacainput">
-    </form>
+            Title: <input type="text" name="title" class="addform" required>
+            Author: <input type="text" name="author" class="addform" required>
+            Year: <input type="number" name="year" class="addform" value="2000" required>
+            Edition: <input type="text" name="edition" class="addform" required>
+            Publisher: <input type="text" name="publisher" class="addform" required>
+            Number of Pieces: <input type="number" name="number_of_pieces" class="addform"min="1" value="1"required>
+            <input type="submit" name="save" value="Save" class="vacainput">
+        </form>
 </div>
 <div class="table-container">
     <table>
