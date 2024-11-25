@@ -95,4 +95,40 @@ td {
     background-color: #c9302c;
 }
 
+.borrow-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.borrow-btn:hover {
+    background-color: #45a049;
+}
+
+input[type="email"] {
+    padding: 5px;
+    margin-right: 5px;
+}
+
+.return-btn {
+    background-color: #f0ad4e;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.return-btn:hover {
+    background-color: #ec971f;
+}
+
+select {
+    padding: 5px;
+    margin-right: 5px;
+}
+ 
  
