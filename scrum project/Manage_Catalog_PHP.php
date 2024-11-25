@@ -48,7 +48,7 @@
             $servername = "localhost";
             $username = "root";
             $password = "";
-            $dbname = "libary";
+            $dbname = "library";
 
             $conn = new mysqli($servername, $username, $password, $dbname);
 
