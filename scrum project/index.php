@@ -3,6 +3,7 @@
 <head>
     <link rel="stylesheet" href="Manage_Catalog_css.css">
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <title>Library</title>
 </head>
 <body>
@@ -50,21 +51,21 @@
             
             if ($book['Pieces'] > 0) {
                 $borrow_date = date('Y-m-d');
-                $return_date = date('Y-m-d', strtotime('+14 days')); 
-                
-                $sql = "INSERT INTO borrowed (Book_ID, Borrower_ID, Borrow_Date, Return_Date) 
-                        VALUES ($book_id, $borrower_id, '$borrow_date', '$return_date')";
+                $return_date = date('Y-m-d', strtotime('+14 days'));
+
+                $sql = "INSERT INTO borrowed (Book_ID, Borrower_ID, Borrow_Date, Return_Date)
+                VALUES ($book_id, $borrower_id, '$borrow_date', '$return_date')";
                         
-                if ($conn->query($sql) === TRUE) {
+                if ($conn->query($sql) === true) {
                     $sql = "UPDATE book SET Pieces = Pieces - 1 WHERE ID = $book_id";
                     $conn->query($sql);
-                    echo "<p style='color: green; text-align: center;'>Book successfully borrowed!</p>";
+                    echo "<p style='color: green; text-align: center;'>Book successfully borrowed</p>";
                 }
             } else {
-                echo "<p style='color: red; text-align: center;'>No copies available!</p>";
+                echo "<p style='color: red; text-align: center;'>No copies available</p>";
             }
         } else {
-            echo "<p style='color: red; text-align: center;'>Email not found! Please register first.</p>";
+            echo "<p style='color: red; text-align: center;'>Email not found. Please register first.</p>";
         }
     }
 
@@ -76,13 +77,16 @@
         echo '<table>';
         echo '<thead>';
         echo '<tr>';
+
         echo '<th>Title</th>';
         echo '<th>Author</th>';
         echo '<th>Year</th>';
         echo '<th>Edition</th>';
         echo '<th>Publisher</th>';
         echo '<th>Available Pieces</th>';
+        echo '<th>Rating</th>';
         echo '<th>Action</th>';
+        
         echo '</tr>';
         echo '</thead>';
         echo '<tbody>';
@@ -95,6 +99,31 @@
             echo "<td>" . $row["Edition"] . "</td>";
             echo "<td>" . $row["Publisher"] . "</td>";
             echo "<td>" . $row["Pieces"] . "</td>";
+            
+            // fürs Rating
+            echo "<td>";
+            if ($row["Rating"]) {
+                $rating = round($row["Rating"], 1);
+                echo "<div class='static-rating'>";
+                // volle Sterne
+                for ($i = 1; $i <= floor($rating); $i++) {
+                    echo "<i class='fas fa-star'></i>";
+                }
+                // halber Stern
+                if ($rating - floor($rating) >= 0.5) {
+                    echo "<i class='fas fa-star-half-alt'></i>";
+                }
+                // leere Sterne
+                for ($i = ceil($rating); $i < 5; $i++) {
+                    echo "<i class='far fa-star'></i>";
+                }
+                echo " <span class='rating-number'>(" . $rating . ")</span>";
+                echo "</div>";
+            } else {
+                echo "No ratings yet";
+            }
+            echo "</td>";
+            
             echo "<td>";
             if ($row["Pieces"] > 0) {
                 echo "<form method='POST' style='display: inline;'>";
@@ -108,14 +137,7 @@
             echo "</td>";
             echo "</tr>";
         }
-        
-        echo '</tbody>';
-        echo '</table>';
-        echo '</div>';
-    } else {
-        echo "No books available";
     }
-
     $conn->close();
     ?>
 </body>
