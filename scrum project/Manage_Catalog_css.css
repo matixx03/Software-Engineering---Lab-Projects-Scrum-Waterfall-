@@ -131,4 +131,37 @@ select {
     margin-right: 5px;
 }
  
- 
+.star-rating {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.star-rating i {
+    color: #ffd700;
+    font-size: 20px;
+    padding: 0 2px;
+}
+
+.star-rating i:hover {
+    transform: scale(1.1);
+}
+
+.fa-star {
+    transition: all 0.2s ease-in-out;
+}
+
+.static-rating {
+    display: inline-block;
+}
+
+.static-rating i {
+    color: #ffd700;
+    font-size: 16px;
+    padding: 0 1px;
+}
+
+.rating-number {
+    color: #666;
+    font-size: 14px;
+    margin-left: 5px;
+}
