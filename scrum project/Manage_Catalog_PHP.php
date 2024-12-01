@@ -23,7 +23,7 @@
             Title: <input type="text" name="Title" class="addform" required>
             Author: <input type="text" name="Author" class="addform" required>
             Year: <input type="number" name="Year" class="addform" value="2000" required>
-            Edition: <input type="text" name="Edition" class="addform" required>
+            Edition: <input type="text" name="Edition" class="addform"min="1" required>
             Publisher: <input type="text" name="Publisher" class="addform" required>
             Number of Pieces: <input type="number" name="Pieces" class="addform"min="1" value="1"required>
             <input type="submit" name="add" value=" Add Book " class="vacainput">
