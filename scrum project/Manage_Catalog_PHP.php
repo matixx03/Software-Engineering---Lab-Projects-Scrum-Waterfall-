@@ -16,27 +16,29 @@
         </div>
     </nav>
     
-    <h1 class="header1">Add book</h1>
+    <h1 class="header1">Manage Catalog</h1>
     <main> 
-    <div class="add_book">
-    <form action="Manage_Catalog_PHP.php" method="POST" class="addform">
+
+    <!-- Suchfomular + Add Button -->
+    <div class="control-container">
+        <button id="toggleAddBook" class="control-btn">Add New Book</button>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search for title, author, publisher..." class="search-input">
+        </div>
+    </div>
+
+    <div id="addBookForm" class="add_book" style="display: none;">
+        <form action="Manage_Catalog_PHP.php" method="POST" class="addform">
             Title: <input type="text" name="Title" class="addform" required>
             Author: <input type="text" name="Author" class="addform" required>
             Year: <input type="number" name="Year" class="addform" value="2000" required>
-            Edition: <input type="text" name="Edition" class="addform"min="1" value="1" required>
+            Edition: <input type="text" name="Edition" class="addform" required>
             Publisher: <input type="text" name="Publisher" class="addform" required>
-            Number of Pieces: <input type="number" name="Pieces" class="addform"min="1" value="1"required>
+            Number of Pieces: <input type="number" name="Pieces" class="addform" min="1" value="1" required>
             <input type="submit" name="add" value=" Add Book " class="vacainput">
         </form>
-
-    <!-- Suchfomular -->
-    <div class="search-container">
-        <form method="GET" class="search-form">
-            <input type="text" name="search" placeholder="Search for title, author, publisher..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>" class="search-input">
-            <input type="submit" value="Search" class="search-btn">
-        </form>
     </div>
-    
+
 </div>
 <div class="table-container">
     <table>
@@ -182,6 +184,49 @@ $result = $stmt->get_result();
                 </tbody>
             </table>
         </div>
+
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const tableRows = document.querySelectorAll('tbody tr');
+
+            // bei Eingabe ins Suchfeld
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+
+                tableRows.forEach(row => {
+                    let text = '';
+                    // Durchsuche alle Zellen der Zeile außer der letzten (Action-Spalte)
+                    for(let i = 0; i < row.cells.length - 1; i++) {
+                        text += row.cells[i].textContent.toLowerCase() + ' ';
+                    }
+                    
+                    if(text.includes(searchTerm)) {
+                        row.style.display = '';     // Zeigt Zeile an, wenn Text gefunden
+                    } else {
+                        row.style.display = 'none';     // versteckt wenn nicht
+                    }
+                });
+            });
+
+            const toggleButton = document.getElementById('toggleAddBook');  // Toggle-Button
+            const addBookForm = document.getElementById('addBookForm');     // Formular
+
+            toggleButton.addEventListener('click', function() {
+                if(addBookForm.style.display === 'none') {
+                    addBookForm.style.display = 'block';
+                    toggleButton.textContent = 'Hide Add Book';
+                    addBookForm.classList.add('visible');
+                } else {
+                    addBookForm.style.display = 'none';
+                    toggleButton.textContent = 'Add New Book';
+                    addBookForm.classList.remove('visible');
+                }
+            });
+
+        });
+        </script>
+        
     </main>
 </body>
 </html>

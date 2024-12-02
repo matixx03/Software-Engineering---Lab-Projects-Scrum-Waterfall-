@@ -20,15 +20,10 @@
     <h1 class="header1">Library Catalog</h1>
 
     <!-- Suchfomular -->
-    <div class="search-container">
-        <form method="GET" class="search-form">
-            <!-- Suchbegriff bleibt im Feld nachdem gesucht wurde
-                 geschützt vor SQL-Injektion
-                 Suchbegriff bleibt beim neuladen erhalten
-            -->
-            <input type="text" name="search" placeholder="Search for title, author, publisher..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>" class="search-input">
-            <input type="submit" value="Search" class="search-btn">
-        </form>
+    <div class="control-container">
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search for title, author, publisher..." class="search-input">
+        </div>
     </div>
     
     <?php
@@ -160,5 +155,31 @@
     }
     $conn->close();
     ?>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('searchInput');
+        const tableRows = document.querySelectorAll('tbody tr');
+
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+
+            tableRows.forEach(row => {
+                let text = '';
+                // Durchsuche alle Zellen der Zeile außer der letzten (Action-Spalte)
+                for(let i = 0; i < row.cells.length - 1; i++) {
+                    text += row.cells[i].textContent.toLowerCase() + ' ';
+                }
+                
+                if(text.includes(searchTerm)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    });
+    </script>
+    
 </body>
 </html>
