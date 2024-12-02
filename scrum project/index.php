@@ -100,23 +100,31 @@
             echo "<td>" . $row["Publisher"] . "</td>";
             echo "<td>" . $row["Pieces"] . "</td>";
             
-            // fürs Rating
+            // Rating Anzeige
             echo "<td>";
             if ($row["Rating"]) {
                 $rating = round($row["Rating"], 1);
                 echo "<div class='static-rating'>";
-                // volle Sterne
+    
+                // Volle Sterne
                 for ($i = 1; $i <= floor($rating); $i++) {
                     echo "<i class='fas fa-star'></i>";
                 }
-                // halber Stern
-                if ($rating - floor($rating) >= 0.5) {
+    
+                // Halber Stern
+                if ($rating - floor($rating) >= 0.3) {
                     echo "<i class='fas fa-star-half-alt'></i>";
                 }
-                // leere Sterne
-                for ($i = ceil($rating); $i < 5; $i++) {
+    
+                // Leere Sterne
+                $remainingStars = 5 - ceil($rating);
+                if ($rating - floor($rating) < 0.3) {
+                    $remainingStars = 5 - floor($rating);
+                }
+                for ($i = 0; $i < $remainingStars; $i++) {
                     echo "<i class='far fa-star'></i>";
                 }
+    
                 echo " <span class='rating-number'>(" . $rating . ")</span>";
                 echo "</div>";
             } else {
