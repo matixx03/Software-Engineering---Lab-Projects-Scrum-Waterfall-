@@ -18,6 +18,18 @@
     </nav>
     
     <h1 class="header1">Library Catalog</h1>
+
+    <!-- Suchfomular -->
+    <div class="search-container">
+        <form method="GET" class="search-form">
+            <!-- Suchbegriff bleibt im Feld nachdem gesucht wurde
+                 geschützt vor SQL-Injektion
+                 Suchbegriff bleibt beim neuladen erhalten
+            -->
+            <input type="text" name="search" placeholder="Search for title, author, publisher..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>" class="search-input">
+            <input type="submit" value="Search" class="search-btn">
+        </form>
+    </div>
     
     <?php
     $servername = "localhost";

@@ -28,6 +28,15 @@
             Number of Pieces: <input type="number" name="Pieces" class="addform"min="1" value="1"required>
             <input type="submit" name="add" value=" Add Book " class="vacainput">
         </form>
+
+    <!-- Suchfomular -->
+    <div class="search-container">
+        <form method="GET" class="search-form">
+            <input type="text" name="search" placeholder="Search for title, author, publisher..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>" class="search-input">
+            <input type="submit" value="Search" class="search-btn">
+        </form>
+    </div>
+    
 </div>
 <div class="table-container">
     <table>
