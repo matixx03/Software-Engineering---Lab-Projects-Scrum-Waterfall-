@@ -167,25 +167,35 @@ select {
 }
 
 .search-container {
-    margin: 20px 40px;
-    text-align: center;
-}
-
-.search-form {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
+    flex-grow: 1;            
+    max-width: 400px;        
 }
 
 .search-input {
+    width: 100%;             
     padding: 8px;
-    width: 300px;
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 16px;
+    transition: border-color 0.3s ease;
 }
 
-.search-btn {
+.search-input:focus {
+    outline: none;
+    border-color: #363535;
+    box-shadow: 0 0 5px rgba(54, 53, 53, 0.2);
+}
+
+.control-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;  
+    gap: 20px;
+    margin: 20px auto;       
+    max-width: 600px;        
+}
+
+.control-btn {
     padding: 8px 20px;
     background-color: #363535;
     color: white;
@@ -193,8 +203,21 @@ select {
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
+    white-space: nowrap;     
+    transition: background-color 0.3s ease;
 }
 
-.search-btn:hover {
+.control-btn:hover {
     background-color: #757171;
+}
+
+.add_book {
+    transition: all 0.3s ease;
+    max-height: 0;
+    overflow: hidden;
+}
+
+.add_book.visible {
+    max-height: 500px;
+    margin: 30px auto;
 }
