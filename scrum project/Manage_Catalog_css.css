@@ -84,14 +84,14 @@ td {
 }
 
 
-.delete {
+.delete, .decrease {
     background-color: #d9534f;
     color: #ffffff;
     border: none;
     padding: 5px 10px;
     cursor: pointer;
 }
-.delete:hover {
+.delete:hover, .decrease:hover {
     background-color: #c9302c;
 }
 
@@ -178,6 +178,10 @@ select {
     border-radius: 4px;
     font-size: 16px;
     transition: border-color 0.3s ease;
+}
+
+.decreasenumber {
+    width: 38%;
 }
 
 .search-input:focus {

@@ -41,20 +41,19 @@
 
 </div>
 <div class="table-container">
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Year</th>
-                <th>Edition</th>
-                <th>Publisher</th>
-                <th>Number of Pieces</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Year</th>
+                        <th>Edition</th>
+                        <th>Publisher</th>
+                        <th>Number of Pieces</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
         <?php
 $servername = "localhost";
 $username = "root";
@@ -107,58 +106,29 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 
+if (isset($_POST['decrease'])) {
+    foreach ($_POST['decrease'] as $id => $value) {
+        if(!empty($_POST['decreasenumber'])) {
+            $decreasenumber = $_POST['decreasenumber'];
+            $stmt = $conn->prepare("UPDATE book SET Pieces = GREATEST(0, Pieces - ?) WHERE id = ?");
+            $stmt->bind_param("ii", $decreasenumber, $id);
+            $stmt->execute();
+        }
+        else {
+            $stmt = $conn->prepare("UPDATE book SET Pieces = GREATEST(0, Pieces - 1) WHERE id = ?");
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+        }
+        $stmt->close();
+    }
+}
+
+
 // Datenbankabfrage für die Anzeige der Tabelle
-$stmt = $conn->prepare("SELECT ID, Title, Author, Year, Edition, Publisher, Pieces FROM book ORDER BY Title");
+$stmt = $conn->prepare("SELECT ID, Title, Author, Year, Edition, Publisher, Pieces FROM book ORDER BY ID");
 $stmt->execute();
 $result = $stmt->get_result();
 
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="Manage_Catalog_css.css">
-    <meta charset="UTF-8">
-    <title>Catalog</title>
-</head>
-<body>
-    <nav class="navigation">
-        <div class="navlist">
-            <ul>
-                <li class="navelement"><a href="index.php" class="navlink">Home</a></li>
-                <li class="navelement"><a href="login.php" class="navlink">Logout</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <h1 class="header1">Add book</h1>
-    <main>
-        <div class="add_book">
-            <form action="Manage_Catalog_PHP.php" method="POST" class="addform">
-                Title: <input type="text" name="Title" class="addform" required>
-                Author: <input type="text" name="Author" class="addform" required>
-                Year: <input type="number" name="Year" class="addform" value="2000" required>
-                Edition: <input type="text" name="Edition" class="addform" min="1" value="1" required>
-                Publisher: <input type="text" name="Publisher" class="addform" required>
-                Number of Pieces: <input type="number" name="Pieces" class="addform" min="1" value="1" required>
-                <input type="submit" name="add" value=" Add Book " class="vacainput">
-            </form>
-        </div>
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Title</th>
-                        <th>Author</th>
-                        <th>Year</th>
-                        <th>Edition</th>
-                        <th>Publisher</th>
-                        <th>Number of Pieces</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
                             echo "<tr>";
@@ -171,6 +141,8 @@ $result = $stmt->get_result();
                             echo "<td>" . htmlspecialchars($row["Pieces"]) . "</td>";
                             echo "<td>";
                             echo "<form action='Manage_Catalog_PHP.php' method='POST' style='display: inline;'>";
+                            echo "<input type='number' class='decreasenumber' style='margin-right: 5px' name='decreasenumber' placeholder='Amount to decrease Pieces'>";
+                            echo "<input type='submit' value='Decrease' class='decrease' style='margin-right: 5px' name='decrease[" . htmlspecialchars($row["ID"]) . "]'>";
                             echo "<input type='submit' value='Delete' class='delete' name='delete[" . htmlspecialchars($row["ID"]) . "]'>";
                             echo "</form>";
                             echo "</td>";
@@ -181,7 +153,6 @@ $result = $stmt->get_result();
                     }
                     $stmt->close();
                     ?>
-                </tbody>
             </table>
         </div>
 
