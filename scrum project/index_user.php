@@ -19,9 +19,9 @@ if ((!isset($_SESSION["id"]))) {
     <nav class="navigation">
         <div class="navlist">
             <ul>
-                <li class="navelement"><a href="index_user" class="navlink">Home</a></li>
+                <li class="navelement"><a href="index_user.php" class="navlink">Home</a></li>
                 <li class="navelement"><a href="return_user.php" class="navlink">Return Books</a></li>
-                <li class="navelement"><a href="logout.php" class="navlink">Logout</a></li>
+                <li class="navelement logout"><a href="logout.php" class="navlink">Logout</a></li>
             </ul>
         </div>
     </nav>
@@ -50,7 +50,7 @@ if ((!isset($_SESSION["id"]))) {
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    echo $_SESSION["email"] ;
+    
     $borrower_email = $_SESSION["email"] ;
     // Ausleihformular
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['borrow'])) {
