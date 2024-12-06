@@ -20,8 +20,8 @@ if ((!isset($_SESSION["id"]))) {
         <div class="navlist">
             <ul>
                 <li class="navelement"><a href="index_user" class="navlink">Home</a></li>
-                <li class="navelement"><a href="logout.php" class="navlink">Logout</a></li>
                 <li class="navelement"><a href="return_user.php" class="navlink">Return Books</a></li>
+                <li class="navelement"><a href="logout.php" class="navlink">Logout</a></li>
             </ul>
         </div>
     </nav>
