@@ -90,23 +90,24 @@ if ((!isset($_SESSION["id"]))) {
         }
     }
 
-    $sql = "SELECT * FROM book WHERE Pieces > 0 ORDER BY title";
+    $sql = "SELECT * FROM book WHERE Pieces > 0 ORDER BY title COLLATE utf8_general_ci";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
         echo '<div class="table-container">';
-        echo '<table>';
+        echo '<table id="tabletest">';
         echo '<thead>';
         echo '<tr>';
 
-        echo '<th>Title</th>';
-        echo '<th>Author</th>';
-        echo '<th>Year</th>';
-        echo '<th>Edition</th>';
-        echo '<th>Publisher</th>';
-        echo '<th>Available Pieces</th>';
+        echo '<th onclick="sortTable(0)">Title</th>';
+        echo '<th onclick="sortTable(1)">Author</th>';
+        echo '<th onclick="sortTable(2)">Year</th>';
+        echo '<th onclick="sortTable(3)">Edition</th>';
+        echo '<th onclick="sortTable(4)">Publisher</th>';
+        echo '<th onclick="sortTable(5)">Available Pieces</th>';
         echo '<th>Rating</th>';
         echo '<th>Action</th>';
+
         
         echo '</tr>';
         echo '</thead>';
@@ -171,6 +172,53 @@ if ((!isset($_SESSION["id"]))) {
     ?>
 
     <script>
+
+function sortTable(n) {
+    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+    table = document.getElementById("tabletest");
+    switching = true;
+    dir = "asc"; // Start mit aufsteigender Sortierung
+    // Solange ein Wechsel erforderlich ist, weiter iterieren
+    while (switching) {
+        switching = false;
+        rows = table.rows;
+        // Durch alle Zeilen der Tabelle iterieren (außer der ersten Zeile, die die Kopfzeile ist)
+        for (i = 1; i < (rows.length - 1); i++) {
+            shouldSwitch = false;
+            //Zwei Elemente zu Vergleichen Wählen
+            x = rows[i].getElementsByTagName("TD")[n];
+            y = rows[i + 1].getElementsByTagName("TD")[n];
+
+            var xValue = x.innerHTML.trim();
+            var yValue = y.innerHTML.trim();
+            
+            if (dir == "asc") {
+                if (xValue.localeCompare(yValue) > 0) {
+                    shouldSwitch = true;
+                    break;
+                }
+            } else if (dir == "desc") {
+                if (xValue.localeCompare(yValue) < 0) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+        }
+
+        // Wenn ein Wechsel erforderlich ist, tausche die Zeilen aus
+        if (shouldSwitch) {
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+            switchcount++;
+        } else {
+            if (switchcount == 0 && dir == "asc") {
+                dir = "desc"; // Ändere die Richtung auf absteigen wenn es keine Wechsel gibt
+                switching = true;
+            }
+        }
+    }
+}
+
     document.addEventListener('DOMContentLoaded', function() {
         const searchInput = document.getElementById('searchInput');
         const tableRows = document.querySelectorAll('tbody tr');
