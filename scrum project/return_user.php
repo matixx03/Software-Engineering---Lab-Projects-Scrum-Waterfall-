@@ -20,8 +20,7 @@ if ((!isset($_SESSION["id"]))) {
         <div class="navlist">
             <ul>
                 <li class="navelement"><a href="index.php" class="navlink">Home</a></li>
-                <li class="navelement"><a href="Manage_Catalog_PHP.php" class="navlink">Manage Catalog</a></li>
-                <li class="navelement"><a href="logout.php" class="navlink">Logout</a></li>
+                <li class="navelement"><a href="login.php" class="navlink">Login</a></li>
             </ul>
         </div>
     </nav>
@@ -33,6 +32,7 @@ if ((!isset($_SESSION["id"]))) {
     $username = "root";
     $password = "";
     $dbname = "library";
+    $email = $_SESSION["email"];
 
     $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -69,9 +69,11 @@ if ((!isset($_SESSION["id"]))) {
     $sql = "SELECT borrowed.ID as borrow_id, borrowed.Book_ID, borrowed.Borrow_Date, borrowed.Return_Date,
             book.Title, book.Author, borrower.Name, borrower.Surname, borrower.E_mail
             FROM borrowed
+            
             JOIN book ON borrowed.Book_ID = book.ID
             JOIN borrower ON borrowed.Borrower_ID = borrower.ID
-            WHERE borrowed.Rating = ''
+            WHERE borrowed.Rating = '' 
+            AND borrower.E_mail = '$email'
             ORDER BY borrowed.Return_Date";
             
     $result = $conn->query($sql);

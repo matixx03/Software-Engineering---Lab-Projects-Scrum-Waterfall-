@@ -1,3 +1,12 @@
+<?php
+session_start();
+if ((!isset($_SESSION["id"]))) {
+    echo "no Access";
+    echo "<script> location.href='login.php'; </script>";
+
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,14 +19,16 @@
     <nav class="navigation">
         <div class="navlist">
             <ul>
+                <li class="navelement"><a href="index_lib.php" class="navlink">Home</a></li>
                 <li class="navelement"><a href="Manage_Catalog_PHP.php" class="navlink">Manage Catalog</a></li>
-                <li class="navelement"><a href="login.php" class="navlink">Login</a></li>
                 <li class="navelement"><a href="return.php" class="navlink">Return Books</a></li>
+                <li class="navelement"><a href="logout.php" class="navlink">Logout</a></li>
             </ul>
         </div>
     </nav>
     
     <h1 class="header1">Library Catalog</h1>
+    
 
     <!-- Suchfomular -->
     <div class="control-container">
@@ -27,6 +38,9 @@
     </div>
     
     <?php
+
+    
+
     $servername = "localhost";
     $username = "root";
     $password = "";
@@ -37,7 +51,7 @@
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-
+    
     // Ausleihformular
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['borrow'])) {
         $book_id = $_POST['book_id'];

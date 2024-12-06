@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -12,18 +14,29 @@ if ($conn->connect_error) {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
-    $surname = $_POST['surname'];
-    $name = $_POST['name'];
+    $password = $_POST['password'];
+    
 
-    $stmt = $conn->prepare("SELECT * FROM borrower WHERE E_mail = ? AND Surname = ? AND Name = ?");
-    $stmt->bind_param("sss", $email, $surname, $name);
+    $stmt = $conn->prepare("SELECT E_Mail, role FROM borrower WHERE E_mail = ? AND password = ?");
+    $stmt->bind_param("ss", $email, $password);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    if ($result->num_rows > 0) {
-        echo "Login erfolgreich! Willkommen, " . htmlspecialchars($name) . " " . htmlspecialchars($surname) . ".";
+    if ($row = $result->fetch_assoc()) {
+        $role = $row['role'];
+        if ($role === "librarian") {
+            $_SESSION["id"] = 1;
+            echo "<script> location.href='index_lib.php'; </script>";
+            exit();
+        } elseif ($role === "user") {
+            $_SESSION["email"] = $email;
+            $_SESSION["id"] = 1;
+            echo "<script> location.href='index_user.php'; </script>";
+            exit();
+        }
+
     } else {
-        echo "Login fehlgeschlagen. Bitte überprüfe deine Eingaben.";
+        $error = "Invalid username or password";
     }
 
     $stmt->close();
@@ -32,4 +45,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $conn->close();
 ?>
 
-
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Login</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="login-container">
+        <h1>Login</h1>
+        <?php if (isset($error) && $error) { ?>
+            <p style="color: red;"><?= htmlspecialchars($error); ?></p>
+         <?php } ?>
+        <form action="login.php" method="POST">
+            <label for="email">E-Mail:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="password">Password:</label>
+            <input type="text" id="password" name="password" required>
+            
+            
+            <button type="submit">Einloggen</button>
+        </form>
+    </div>
+</body>
+</html>

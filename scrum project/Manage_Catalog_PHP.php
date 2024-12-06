@@ -1,3 +1,12 @@
+<?php
+session_start();
+if ((!isset($_SESSION["id"]))) {
+    echo "no Access";
+    echo "<script> location.href='login.php'; </script>";
+
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +20,7 @@
         <div class="navlist">
             <ul>
                 <li class="navelement"><a href="index.php" class="navlink">Home</a></li>
-                <li class="navelement"><a href="login.php" class="navlink">Logout</a></li>
+                <li class="navelement"><a href="logout.php" class="navlink">Logout</a></li>
             </ul>
         </div>
     </nav>
