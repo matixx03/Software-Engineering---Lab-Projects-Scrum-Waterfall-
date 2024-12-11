@@ -64,10 +64,10 @@ $conn->close();
             <input type="email" id="email" name="email" required>
             
             <label for="password">Password:</label>
-            <input type="text" id="password" name="password" required>
+            <input type="password" id="password" name="password" required>
             
             
-            <button type="submit">Einloggen</button>
+            <button type="submit">Login</button>
         </form>
     </div>
 </body>

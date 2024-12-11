@@ -49,7 +49,7 @@ if ((!isset($_SESSION["id"]))) {
             <option value="librarian">Librarian</option>
             <option value="user">User</option>
         </select>
-        <input type="submit" name="add" value=" Add User " class="vacainput">
+        <input type="submit" name="add" value=" Add User " class="borrow-btn">
     </form>
 </div>
 

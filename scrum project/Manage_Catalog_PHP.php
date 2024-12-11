@@ -44,7 +44,7 @@ if ((!isset($_SESSION["id"]))) {
             Edition: <input type="text" name="Edition" class="addform" required>
             Publisher: <input type="text" name="Publisher" class="addform" required>
             Number of Pieces: <input type="number" name="Pieces" class="addform" min="1" value="1" required>
-            <input type="submit" name="add" value=" Add Book " class="vacainput">
+            <input type="submit" name="add" value=" Add Book " class="borrow-btn">
         </form>
     </div>
 
