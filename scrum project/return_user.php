@@ -13,6 +13,8 @@ if ((!isset($_SESSION["id"]))) {
     <link rel="stylesheet" href="Manage_Catalog_css.css">
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="messages.css">
+    <script src="badge_utils.js"></script>
     <title>Return Books</title>
 </head>
 <body>
@@ -20,6 +22,7 @@ if ((!isset($_SESSION["id"]))) {
         <div class="navlist">
             <ul>
                 <li class="navelement"><a href="index_user.php" class="navlink">Home</a></li>
+                <li class="navelement"><a href="messages.php" class="navlink">Messages <span id="unread-badge" class="badge"></span></a></li>
                 <li class="navelement"><a href="logout.php" class="navlink">Logout</a></li>
             </ul>
         </div>
@@ -187,4 +190,5 @@ if ((!isset($_SESSION["id"]))) {
             });
         }
     });
+    document.addEventListener('DOMContentLoaded', initializeBadgeUpdates);
     </script>

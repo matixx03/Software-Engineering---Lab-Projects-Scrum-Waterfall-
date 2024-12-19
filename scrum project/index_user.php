@@ -13,6 +13,8 @@ if ((!isset($_SESSION["id"]))) {
     <link rel="stylesheet" href="Manage_Catalog_css.css">
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="messages.css">
+    <script src="badge_utils.js"></script>
     <title>Library</title>
 </head>
 <body>
@@ -21,6 +23,7 @@ if ((!isset($_SESSION["id"]))) {
             <ul>
                 <li class="navelement"><a href="index_user.php" class="navlink">Home</a></li>
                 <li class="navelement"><a href="return_user.php" class="navlink">Return Books</a></li>
+                <li class="navelement"><a href="messages.php" class="navlink">Messages <span id="unread-badge" class="badge"></span></a></li>
                 <li class="navelement logout"><a href="logout.php" class="navlink">Logout</a></li>
             </ul>
         </div>
@@ -51,7 +54,7 @@ if ((!isset($_SESSION["id"]))) {
         die("Connection failed: " . $conn->connect_error);
     }
     
-    $borrower_email = $_SESSION["email"] ;
+    $borrower_email = $_SESSION["email"];
     // Ausleihformular
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['borrow'])) {
         $book_id = $_POST['book_id'];
@@ -158,7 +161,6 @@ if ((!isset($_SESSION["id"]))) {
             if ($row["Pieces"] > 0) {
                 echo "<form method='POST' style='display: inline;'>";
                 echo "<input type='hidden' name='book_id' value='" . $row["ID"] . "'>";
-                
                 echo "<input type='submit' name='borrow' value='Borrow' class='borrow-btn'>";
                 echo "</form>";
             } else {
@@ -241,7 +243,7 @@ function sortTable(n) {
             });
         });
     });
+        document.addEventListener('DOMContentLoaded', initializeBadgeUpdates);
     </script>
-    
 </body>
 </html>

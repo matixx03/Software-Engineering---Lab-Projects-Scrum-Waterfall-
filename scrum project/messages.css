@@ -1,0 +1,68 @@
+.messages-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.badge {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 12px;
+    display: none;
+}
+
+.navelement {
+    position: relative;
+}
+
+.message.unread {
+    background-color: #bebbbb;
+}
+.message.read {
+    background-color: #f0efef;
+}
+.message {
+    background-color: #f5f5f5;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #e0e0e0;
+    transition: background-color 0.3s ease;
+}
+
+.view-more {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.view-more:hover {
+    background-color: #0056b3;
+}
+
+.dropdown-content {
+    display: none;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #f8f8f8;
+    border-radius: 4px;
+}
+
+.dropdown-content.show {
+    display: block;
+}
+
+.here {
+    color: blue;
+}
