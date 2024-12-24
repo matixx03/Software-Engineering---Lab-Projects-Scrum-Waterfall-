@@ -3,7 +3,6 @@ session_start();
 if ((!isset($_SESSION["id"]))) {
     echo "no Access";
     echo "<script> location.href='login.php'; </script>";
-
 }
 ?>
 
@@ -31,8 +30,6 @@ if ((!isset($_SESSION["id"]))) {
     
     <h1 class="header1">Library Catalog</h1>
     
-
-    <!-- Suchfomular -->
     <div class="control-container">
         <div class="search-container">
             <input type="text" id="searchInput" placeholder="Search for title, author, publisher..." class="search-input">
@@ -40,9 +37,6 @@ if ((!isset($_SESSION["id"]))) {
     </div>
     
     <?php
-
-    
-
     $servername = "localhost";
     $username = "root";
     $password = "";
@@ -55,12 +49,10 @@ if ((!isset($_SESSION["id"]))) {
     }
     
     $borrower_email = $_SESSION["email"];
-    // Ausleihformular
+    
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['borrow'])) {
         $book_id = $_POST['book_id'];
        
-        
-        // suche in der borrower-Tabelle nach der E-Mail
         $sql = "SELECT ID FROM borrower WHERE E_mail = '$borrower_email'";
         $result = $conn->query($sql);
         
@@ -68,7 +60,6 @@ if ((!isset($_SESSION["id"]))) {
             $borrower = $result->fetch_assoc();
             $borrower_id = $borrower['ID'];
             
-            // prüft in book-Tabelle ob noch bücher da sind
             $sql = "SELECT Pieces FROM book WHERE ID = $book_id";
             $result = $conn->query($sql);
             $book = $result->fetch_assoc();
@@ -93,7 +84,7 @@ if ((!isset($_SESSION["id"]))) {
         }
     }
 
-    $sql = "SELECT * FROM book WHERE Pieces > 0 ORDER BY title";
+    $sql = "SELECT * FROM book ORDER BY title";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -101,7 +92,6 @@ if ((!isset($_SESSION["id"]))) {
         echo '<table id="tabletest">';
         echo '<thead>';
         echo '<tr>';
-
         echo '<th onclick="sortTable(0)">Title</th>';
         echo '<th onclick="sortTable(1)">Author</th>';
         echo '<th onclick="sortTable(2)">Year</th>';
@@ -110,8 +100,6 @@ if ((!isset($_SESSION["id"]))) {
         echo '<th onclick="sortTable(5)">Available Pieces</th>';
         echo '<th>Rating</th>';
         echo '<th>Action</th>';
-
-        
         echo '</tr>';
         echo '</thead>';
         echo '<tbody>';
@@ -125,23 +113,19 @@ if ((!isset($_SESSION["id"]))) {
             echo "<td>" . $row["Publisher"] . "</td>";
             echo "<td>" . $row["Pieces"] . "</td>";
             
-            // Rating Anzeige
             echo "<td>";
             if ($row["Rating"]) {
                 $rating = round($row["Rating"], 1);
                 echo "<div class='static-rating'>";
     
-                // Volle Sterne
                 for ($i = 1; $i <= floor($rating); $i++) {
                     echo "<i class='fas fa-star'></i>";
                 }
     
-                // Halber Stern
                 if ($rating - floor($rating) >= 0.3) {
                     echo "<i class='fas fa-star-half-alt'></i>";
                 }
     
-                // Leere Sterne
                 $remainingStars = 5 - ceil($rating);
                 if ($rating - floor($rating) < 0.3) {
                     $remainingStars = 5 - floor($rating);
@@ -169,57 +153,57 @@ if ((!isset($_SESSION["id"]))) {
             echo "</td>";
             echo "</tr>";
         }
+        echo '</tbody>';
+        echo '</table>';
+        echo '</div>';
     }
     $conn->close();
     ?>
 
     <script>
-
-function sortTable(n) {
-    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-    table = document.getElementById("tabletest");
-    switching = true;
-    dir = "asc"; // Start mit aufsteigender Sortierung
-    // Solange ein Wechsel erforderlich ist, weiter iterieren
-    while (switching) {
-        switching = false;
-        rows = table.rows;
-        // Durch alle Zeilen der Tabelle iterieren (außer der ersten Zeile, die die Kopfzeile ist)
-        for (i = 1; i < (rows.length - 1); i++) {
-            shouldSwitch = false;
-            //Zwei Elemente zu Vergleichen Wählen
-            x = rows[i].getElementsByTagName("TD")[n];
-            y = rows[i + 1].getElementsByTagName("TD")[n];
-
-            var xValue = x.innerHTML.trim();
-            var yValue = y.innerHTML.trim();
+    function sortTable(n) {
+        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+        table = document.getElementById("tabletest");
+        switching = true;
+        dir = "asc";
+        
+        while (switching) {
+            switching = false;
+            rows = table.rows;
             
-            if (dir == "asc") {
-                if (xValue.localeCompare(yValue) > 0) {
-                    shouldSwitch = true;
-                    break;
-                }
-            } else if (dir == "desc") {
-                if (xValue.localeCompare(yValue) < 0) {
-                    shouldSwitch = true;
-                    break;
+            for (i = 1; i < (rows.length - 1); i++) {
+                shouldSwitch = false;
+                x = rows[i].getElementsByTagName("TD")[n];
+                y = rows[i + 1].getElementsByTagName("TD")[n];
+
+                var xValue = x.innerHTML.trim();
+                var yValue = y.innerHTML.trim();
+                
+                if (dir == "asc") {
+                    if (xValue.localeCompare(yValue) > 0) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else if (dir == "desc") {
+                    if (xValue.localeCompare(yValue) < 0) {
+                        shouldSwitch = true;
+                        break;
+                    }
                 }
             }
-        }
 
-        // Wenn ein Wechsel erforderlich ist, tausche die Zeilen aus
-        if (shouldSwitch) {
-            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-            switching = true;
-            switchcount++;
-        } else {
-            if (switchcount == 0 && dir == "asc") {
-                dir = "desc"; // Ändere die Richtung auf absteigen wenn es keine Wechsel gibt
+            if (shouldSwitch) {
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
                 switching = true;
+                switchcount++;
+            } else {
+                if (switchcount == 0 && dir == "asc") {
+                    dir = "desc";
+                    switching = true;
+                }
             }
         }
     }
-}
 
     document.addEventListener('DOMContentLoaded', function() {
         const searchInput = document.getElementById('searchInput');
@@ -230,7 +214,6 @@ function sortTable(n) {
 
             tableRows.forEach(row => {
                 let text = '';
-                // Durchsuche alle Zellen der Zeile außer der letzten (Action-Spalte)
                 for(let i = 0; i < row.cells.length - 1; i++) {
                     text += row.cells[i].textContent.toLowerCase() + ' ';
                 }
@@ -243,7 +226,7 @@ function sortTable(n) {
             });
         });
     });
-        document.addEventListener('DOMContentLoaded', initializeBadgeUpdates);
+    document.addEventListener('DOMContentLoaded', initializeBadgeUpdates);
     </script>
 </body>
 </html>
