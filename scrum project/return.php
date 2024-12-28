@@ -40,29 +40,57 @@ if ((!isset($_SESSION["id"]))) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['return'])) {
-        $borrow_id = $_POST['borrow_id'];
-        $book_id = $_POST['book_id'];
-        $rating = $_POST['rating'];
-
-        // Rating in der borrowed Tabelle
-        $sql = "UPDATE borrowed SET Rating = '$rating' WHERE ID = $borrow_id";
-        $conn->query($sql);
-
-        // erhöhe verfügbare Exemplare
-        $sql = "UPDATE book SET Pieces = Pieces + 1 WHERE ID = $book_id";
-        $conn->query($sql);
-
-        // Berechnung Bewertung der Bücher
-        $sql = "UPDATE book SET Rating = (
-            SELECT AVG(Rating)
-            FROM borrowed
-            WHERE Book_ID = $book_id
-            AND Rating != ''
-        ) WHERE ID = $book_id";
-        $conn->query($sql);
-
-        echo "<p style='color: green; text-align: center;'>Book successfully returned and rated!</p>";
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if (isset($_POST['return'])) {
+            // Rückgabecode für den Fall, dass "Return" geklickt wurde
+            $borrow_id = $_POST['borrow_id'];
+            $book_id = $_POST['book_id'];
+            $rating = $_POST['rating'];
+    
+            // Rating in der borrowed Tabelle
+            $sql = "UPDATE borrowed SET Rating = '$rating' WHERE ID = $borrow_id";
+            $conn->query($sql);
+    
+            // erhöhe verfügbare Exemplare
+            $sql = "UPDATE book SET Pieces = Pieces + 1 WHERE ID = $book_id";
+            $conn->query($sql);
+    
+            // Berechnung Bewertung der Bücher
+            $sql = "UPDATE book SET Rating = (
+                SELECT AVG(Rating)
+                FROM borrowed
+                WHERE Book_ID = $book_id
+                AND Rating != ''
+            ) WHERE ID = $book_id";
+            $conn->query($sql);
+    
+            echo "<p style='color: green; text-align: center;'>Book successfully returned and rated!</p>";
+        }
+        
+        // Erweiterung des Rückgabedatums um eine Woche
+        if (isset($_POST['extend'])) {
+            $borrow_id = $_POST['borrow_id'];
+    
+            // SQL-Abfrage, um das aktuelle Rückgabedatum zu erhalten
+            $sql = "SELECT Return_Date FROM borrowed WHERE ID = $borrow_id";
+            $result = $conn->query($sql);
+    
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $return_date = $row['Return_Date'];
+    
+                // Rückgabedatum um eine Woche verlängern
+                $new_return_date = date('Y-m-d', strtotime($return_date . ' +7 days'));
+    
+                // SQL-Abfrage, um das Rückgabedatum zu aktualisieren
+                $sql = "UPDATE borrowed SET Return_Date = '$new_return_date' WHERE ID = $borrow_id";
+                if ($conn->query($sql) === TRUE) {
+                    echo "<p style='color: blue; text-align: center;'>Return date successfully extended by 1 week!</p>";
+                } else {
+                    echo "<p style='color: red; text-align: center;'>Error extending the return date.</p>";
+                }
+            }
+        }
     }
 
     // alle nicht bewertete, ausgeliehene Bücher
@@ -120,6 +148,7 @@ if ((!isset($_SESSION["id"]))) {
             echo "</div>";
             echo "</td>";
             echo "<td>";
+            echo "<input type='submit' name='extend' value='Extend' class='return-btn'>";
             echo "<input type='submit' name='return' value='Return' class='return-btn'>";
             echo "</form>";
             echo "</div>";
@@ -165,7 +194,7 @@ if ((!isset($_SESSION["id"]))) {
             });
 
             form.addEventListener('submit', function(e) {
-                if (!ratingInput.value) {
+                if (e.submitter && e.submitter.name === 'return' && !ratingInput.value) {
                     e.preventDefault();
                     alert('Please select a rating before returning the book.');
                 }
