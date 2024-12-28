@@ -150,7 +150,7 @@ $result = $stmt->get_result();
                             echo "<td>" . htmlspecialchars($row["Pieces"]) . "</td>";
                             echo "<td>";
                             echo "<form action='Manage_Catalog_PHP.php' method='POST' style='display: inline;'>";
-                            echo "<input type='number' class='decreasenumber' style='margin-right: 5px' name='decreasenumber' placeholder='Amount to decrease Pieces'>";
+                            echo "<input type='number' class='decreasenumber' style='margin-right: 5px' name='decreasenumber' min='1' placeholder='Amount to decrease Pieces'>";
                             echo "<input type='submit' value='Decrease' class='decrease' style='margin-right: 5px' name='decrease[" . htmlspecialchars($row["ID"]) . "]'>";
                             echo "<input type='submit' value='Delete' class='delete' name='delete[" . htmlspecialchars($row["ID"]) . "]'>";
                             echo "</form>";
