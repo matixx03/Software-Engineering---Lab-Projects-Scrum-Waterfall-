@@ -22,8 +22,8 @@ if ((!isset($_SESSION["id"]))|| $_SESSION["role"] == "librarian") {
         <div class="navlist">
             <ul>
                 <li class="navelement"><a href="index_user.php" class="navlink">Home</a></li>
+                <li class="navelement"><a href="return_user.php" class="navlink">Return Books</a></li>
                 <li class="navelement"><a href="messages.php" class="navlink">Messages <span id="unread-badge" class="badge"></span></a></li>
-                <li class="navelement"><a href="logout.php" class="navlink">Logout</a></li>
             </ul>
         </div>
     </nav>

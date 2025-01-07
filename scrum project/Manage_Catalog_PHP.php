@@ -20,7 +20,9 @@ if ((!isset($_SESSION["id"])) || $_SESSION["role"] == "user") {
         <div class="navlist">
             <ul>
                 <li class="navelement"><a href="index_lib.php" class="navlink">Home</a></li>
-                <li class="navelement"><a href="logout.php" class="navlink">Logout</a></li>
+                <li class="navelement"><a href="Manage_Catalog_PHP.php" class="navlink">Manage Catalog</a></li>
+                <li class="navelement"><a href="return.php" class="navlink">Return Books</a></li>
+                <li class="navelement"><a href="account.php" class="navlink">Create User</a></li>
             </ul>
         </div>
     </nav>
