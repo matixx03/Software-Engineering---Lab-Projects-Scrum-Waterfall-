@@ -157,6 +157,7 @@ if ((!isset($_SESSION["id"])) || $_SESSION["role"] == "librarian") {
         echo '</table>';
         echo '</div>';
     }
+    echo '<footer><div class="footer">User: ' . $_SESSION["email"] . '<br><a href="logout.php">Logout</a></div></footer>';
     $conn->close();
     ?>
 

@@ -65,6 +65,10 @@ $conn->close();
     </nav>
     <div id="messages-container" class="messages-container"></div>
 
+    <?php    
+       echo '<footer><div class="footer">User: ' . $_SESSION["email"] . '<br><a href="logout.php">Logout</a></div></footer>';
+    ?>
+
 <script>
     const books = <?php echo json_encode($books); ?>;
     const unreadCount = <?php echo $unread_count; ?>;

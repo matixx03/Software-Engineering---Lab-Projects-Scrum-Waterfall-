@@ -139,10 +139,12 @@ $result = $stmt->get_result();
                     } else {
                         echo "<tr><td colspan='8'>No data available</td></tr>";
                     }
+                    
+        echo '</table>';
+        echo '</div>';
+        echo '<footer><div class="footer">User: ' . $_SESSION["email"] . '<br><a href="logout.php">Logout</a></div></footer>';
                     $stmt->close();
                     ?>
-            </table>
-        </div>
 
         <script>
         document.addEventListener('DOMContentLoaded', function() {

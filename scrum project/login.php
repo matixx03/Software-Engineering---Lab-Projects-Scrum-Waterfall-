@@ -25,6 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($row = $result->fetch_assoc()) {
         $role = $row['role'];
         if ($role === "librarian") {
+            $_SESSION["email"] = $email;
             $_SESSION["id"] = 1;
             $_SESSION["role"] = $role;
             echo "<script> location.href='index_lib.php'; </script>";

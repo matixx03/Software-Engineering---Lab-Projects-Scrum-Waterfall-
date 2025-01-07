@@ -54,6 +54,22 @@ td {
     width: fit-content; 
 }
 
+.footer{
+    
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    padding: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #363535;
+    color: #f7efef;
+    text-align: center;
+    
+    
+}
+
+
 .navelement { 
     display: inline-flex;
     background-color: #363535;

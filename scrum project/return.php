@@ -163,6 +163,7 @@ if ((!isset($_SESSION["id"]))|| $_SESSION["role"] == "user") {
         echo "<p style='text-align: center;'>No books currently borrowed</p>";
     }
 
+    echo '<footer><div class="footer">User: ' . $_SESSION["email"] . '<br><a href="logout.php">Logout</a></div></footer>';
     $conn->close();
     ?>
 
