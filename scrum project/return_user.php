@@ -1,6 +1,6 @@
 <?php
 session_start();
-if ((!isset($_SESSION["id"]))) {
+if ((!isset($_SESSION["id"]))|| $_SESSION["role"] == "librarian") {
     echo "no Access";
     echo "<script> location.href='login.php'; </script>";
 

@@ -26,10 +26,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $role = $row['role'];
         if ($role === "librarian") {
             $_SESSION["id"] = 1;
+            $_SESSION["role"] = $role;
             echo "<script> location.href='index_lib.php'; </script>";
             exit();
         } elseif ($role === "user") {
             $_SESSION["email"] = $email;
+            $_SESSION["role"] = $role;
             $_SESSION["id"] = 1;
             echo "<script> location.href='index_user.php'; </script>";
             exit();
