@@ -90,8 +90,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if ($pieces < 1) {
             echo "<p style='color: red;'>The number of pieces must be at least 1.</p>";
         } else {
-            $stmt = $conn->prepare("INSERT INTO book (Title, Author, Year, Edition, Publisher, Pieces) VALUES (?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("ssissi", $title, $author, $year, $edition, $publisher, $pieces);
+            require_once 'book_cover.php';
+            $coverManager = new BookCoverManager($conn);
+            $coverUrl = $coverManager->fetchFromAPI($title, $author);
+
+            $stmt = $conn->prepare("INSERT INTO book (Title, Author, Year, Edition, Publisher, Pieces, cover_url, last_cover_update) VALUES (?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)");
+            $stmt->bind_param("ssissss", $title, $author, $year, $edition, $publisher, $pieces, $coverUrl);
 
             if ($stmt->execute()) {
                 echo "<p>New book added successfully!</p>";

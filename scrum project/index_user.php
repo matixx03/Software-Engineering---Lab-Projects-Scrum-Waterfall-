@@ -1,4 +1,5 @@
 <?php
+require_once 'book_cover.php';
 session_start();
 if ((!isset($_SESSION["id"])) || $_SESSION["role"] == "librarian") {
     echo "no Access";
@@ -42,6 +43,7 @@ if ((!isset($_SESSION["id"])) || $_SESSION["role"] == "librarian") {
     $dbname = "library";
 
     $conn = new mysqli($servername, $username, $password, $dbname);
+    $coverManager = new BookCoverManager($conn);
 
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
@@ -91,12 +93,13 @@ if ((!isset($_SESSION["id"])) || $_SESSION["role"] == "librarian") {
         echo '<table id="tabletest">';
         echo '<thead>';
         echo '<tr>';
-        echo '<th onclick="sortTable(0)">Title</th>';
-        echo '<th onclick="sortTable(1)">Author</th>';
-        echo '<th onclick="sortTable(2)">Year</th>';
-        echo '<th onclick="sortTable(3)">Edition</th>';
-        echo '<th onclick="sortTable(4)">Publisher</th>';
-        echo '<th onclick="sortTable(5)">Available Pieces</th>';
+        echo '<th>Cover</th>';
+        echo '<th onclick="sortTable(1)">Title</th>';
+        echo '<th onclick="sortTable(2)">Author</th>';
+        echo '<th onclick="sortTable(3)">Year</th>';
+        echo '<th onclick="sortTable(4)">Edition</th>';
+        echo '<th onclick="sortTable(5)">Publisher</th>';
+        echo '<th onclick="sortTable(6)">Available Pieces</th>';
         echo '<th>Rating</th>';
         echo '<th>Action</th>';
         echo '</tr>';
@@ -104,7 +107,20 @@ if ((!isset($_SESSION["id"])) || $_SESSION["role"] == "librarian") {
         echo '<tbody>';
         
         while($row = $result->fetch_assoc()) {
+            $coverUrl = $coverManager->getCover($row['ID'], $row['Title'], $row['Author']);
+            if (empty($coverUrl)) {
+                $coverUrl = getBookCover($row["Title"], $row["Author"]);
+                $stmt = $conn->prepare("UPDATE book SET cover_url = ? WHERE ID = ?");
+                $stmt->bind_param("si", $coverUrl, $row["ID"]);
+                $stmt->execute();
+            }
+
             echo "<tr>";
+            echo "<td class='cover-cell'>";
+            echo "<img src='" . htmlspecialchars($coverUrl) . "' 
+              alt='Cover' 
+              class='book-cover' 
+              loading='lazy'>"; // Lazy Loading für bessere Performance
             echo "<td>" . $row["Title"] . "</td>";
             echo "<td>" . $row["Author"] . "</td>";
             echo "<td>" . $row["Year"] . "</td>";
